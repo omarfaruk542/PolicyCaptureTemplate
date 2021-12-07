@@ -30,3 +30,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/company', 'CompanyInfoController');
 Route::get('/user','Auth\UserController@index')->name('user.index');
 Route::get('/user/create','Auth\UserController@create')->name('user.create');
+Route::resource('/question','QuestionnaireController');
