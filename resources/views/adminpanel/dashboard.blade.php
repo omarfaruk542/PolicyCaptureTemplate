@@ -94,7 +94,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('register/user') }}" class="nav-link {{ (request()->is('register*')) ? 'active' : '' }}">
+                    <a href="{{ route('user.index') }}" class="nav-link {{ (request()->is('user*')) ? 'active' : '' }}">
                     <i class="fas fa-users nav-icon"></i>
                       <p>User Info</p>
                     </a>

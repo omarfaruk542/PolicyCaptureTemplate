@@ -16,18 +16,23 @@ class CompanyInfoController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('admin');
     }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $projectList = CompanyInfo::orderBy('id','DESC')->get();
         $totalProjects = count($projectList);
-        return view('adminpanel.company_list',compact('projectList','totalProjects'));
+        if ($request->ajax()) {
+            return response()->json($projectList);
+        } else {
+            return view('adminpanel.company_list',compact('projectList','totalProjects'));
+        }
+
     }
 
     /**

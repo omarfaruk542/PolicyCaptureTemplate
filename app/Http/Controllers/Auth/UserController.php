@@ -10,7 +10,7 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('admin');
     }
 
     public function index(){
@@ -18,5 +18,9 @@ class UserController extends Controller
         // return $users;
         $totalUser = count($users);
         return view('auth.userlist',compact('users','totalUser'));
+    }
+
+    public function create(){
+        return view('auth.register');
     }
 }

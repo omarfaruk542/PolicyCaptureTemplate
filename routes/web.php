@@ -16,11 +16,17 @@ use App\Http\Controllers\CompanyInfoController;
 */
 
 Route::get('/', function () {
-    return view('auth.login');
+    if(!Auth::check()){
+        return view('auth.login');
+    } else {
+        return view('home');
+    }
+
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/company', 'CompanyInfoController');
-Route::get('/register/userlist','Auth\UserController@index')->name('register/user');
+Route::get('/user','Auth\UserController@index')->name('user.index');
+Route::get('/user/create','Auth\UserController@create')->name('user.create');

@@ -47,7 +47,7 @@
     <link rel="stylesheet" href="{{ asset('assets/customs-asset/style.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/dist/css/style.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('assets/dist/css/style.css') }}"> --}}
     <!-- Styles -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 

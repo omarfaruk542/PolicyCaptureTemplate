@@ -45,7 +45,7 @@
                     <div class="card card-primary card-outline">
                         <div class="card-header">
                             <h5 class="m-0 float-left">User List</h5>
-                            <a type="button" href="{{ route('company.create') }}"
+                            <a type="button" href="{{ route('user.create') }}"
                                 class="btn btn-sm btn-primary float-right">Add New User
                                 <span class="badge badge-light ml-1">{{ $totalUser }}</span>
                             </a>
