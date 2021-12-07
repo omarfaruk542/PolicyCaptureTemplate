@@ -99,24 +99,13 @@
       </a>
       <!-- Sidebar -->
       <div class="sidebar">
-        <!-- SidebarSearch Form -->
-        <div class="form-inline">
-          <div class="input-group" data-widget="sidebar-search">
-            <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-            <div class="input-group-append">
-              <button class="btn btn-sidebar">
-                <i class="fas fa-search fa-fw"></i>
-              </button>
-            </div>
-          </div>
-        </div>
         <!-- Sidebar Menu -->
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <!-- Add icons to the links using the .nav-icon class
                  with font-awesome or any other icon font library -->
             <li class="nav-item menu-open">
-              <a href="#" class="nav-link active">
+              <a href="{{ route('home') }}" class="nav-link active">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
                  Dashboard
@@ -125,11 +114,17 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="{{ route('company.index') }}" class="nav-link active">
+                  <a href="{{ route('company.index') }}" class="nav-link {{ (request()->is('company*')) ? 'active' : '' }}">
                     <i class="fas fa-building nav-icon"></i>
                     <p>Project Info</p>
                   </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('company.index') }}" class="nav-link">
+                    <i class="fas fa-users nav-icon"></i>
+                      <p>User Info</p>
+                    </a>
+                  </li>
               </ul>
             </li>
           </ul>

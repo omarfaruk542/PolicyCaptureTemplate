@@ -25,7 +25,9 @@ class CompanyInfoController extends Controller
      */
     public function index()
     {
-        return view('adminpanel.company_list');
+        $projectList = CompanyInfo::orderBy('id','DESC')->get();
+        $totalProjects = count($projectList);
+        return view('adminpanel.company_list',compact('projectList','totalProjects'));
     }
 
     /**
@@ -35,7 +37,9 @@ class CompanyInfoController extends Controller
      */
     public function create()
     {
-        return view('adminpanel.create_company');
+        $projectList = CompanyInfo::all();
+        $totalProjects = count($projectList);
+        return view('adminpanel.create_company',compact('totalProjects'));
     }
 
     /**
@@ -48,20 +52,21 @@ class CompanyInfoController extends Controller
     {
         // return $request;
         $validatedData = $request->validate([
-            'name'      => 'required|unique',
-            'address'   => 'required',
-            'po_date'   => 'required|date'
+            'project_name'      => 'required|unique:company_infos,name',
+            'project_address'   => 'required',
+            'po_date'           => 'required|date'
         ],
         [
-            'name.required'     => 'The project name field is required',
-            'address.required'  => 'The project address field is required',
-            'po_date.required'  => 'Work order date field is required'
+            'project_name.required'     => 'The project name field is required',
+            'project_name.unique'       => 'The project name already exists',
+            'project_address.required'  => 'The project address field is required',
+            'po_date.required'          => 'Work order date field is required'
         ]);
 
 
         $companyInfo            = new CompanyInfo;
-        $companyInfo->name      = $request->name;
-        $companyInfo->address   = $request->address;
+        $companyInfo->name      = $request->project_name;
+        $companyInfo->address   = $request->project_address;
         $companyInfo->po_date   = $request->po_date;
         $companyInfo->is_active = isset($request->is_active) ? 1 : 0;
 
