@@ -1,6 +1,27 @@
 @extends('adminpanel.dashboard')
 @section('dashboard')
     <div class="content-header">
+        <!-- Notification -->
+        @if (session('status'))
+            <div class="toast message" style="position: absolute; top: 60px; right: 0; z-index: 1070; width:300px;"
+                data-delay="5000">
+                <div class="toast-header bg-success">
+                    <strong class="mr-auto">Success</strong>
+                    <small>Just Now</small>
+                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="toast-body">
+                    <div>
+                        <i class="fas fa-check-square mr-2 text-success"></i>
+                        <span>{{ session('status') }}</span>
+
+                    </div>
+                </div>
+            </div>
+        @endif
+        <!-- Notification -->
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
@@ -37,7 +58,8 @@
                                     <div class="form-group">
                                         <label for="project_name">Project Name</label>
                                         <input type="text" class="form-control @error('project_name') is-invalid @enderror"
-                                            id="project_name" placeholder="Enter project name" name="project_name" value="{{ old('project_name') }}">
+                                            id="project_name" placeholder="Enter project name" name="project_name"
+                                            value="{{ old('project_name') }}">
                                         @error('project_name')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
@@ -46,7 +68,8 @@
                                         <label for="project_address">Project Address</label>
                                         <input type="text"
                                             class="form-control @error('project_address') is-invalid @enderror"
-                                            id="project_address" placeholder="Enter project address" name="project_address" value="{{ old('project_address') }}">
+                                            id="project_address" placeholder="Enter project address" name="project_address"
+                                            value="{{ old('project_address') }}">
                                         @error('project_address')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
@@ -54,7 +77,8 @@
                                     <div class="form-group">
                                         <label for="po_date">Work Order Date</label>
                                         <input type="date" class="form-control @error('po_date') is-invalid @enderror"
-                                            id="po_date" placeholder="Enter work order date" name="po_date" value="{{ old('po_date') }}">
+                                            id="po_date" placeholder="Enter work order date" name="po_date"
+                                            value="{{ old('po_date') }}">
                                         @error('po_date')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror

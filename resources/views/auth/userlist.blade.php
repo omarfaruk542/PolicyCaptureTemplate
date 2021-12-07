@@ -30,7 +30,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-                        <li class="breadcrumb-item active">Project List</li>
+                        <li class="breadcrumb-item active">User List</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -44,10 +44,10 @@
                 <div class="col-lg-12">
                     <div class="card card-primary card-outline">
                         <div class="card-header">
-                            <h5 class="m-0 float-left">Project List</h5>
+                            <h5 class="m-0 float-left">User List</h5>
                             <a type="button" href="{{ route('company.create') }}"
-                                class="btn btn-sm btn-primary float-right">Add New Project
-                                <span class="badge badge-light ml-1">{{ $totalProjects }}</span>
+                                class="btn btn-sm btn-primary float-right">Add New User
+                                <span class="badge badge-light ml-1">{{ $totalUser }}</span>
                             </a>
                         </div>
                         <div class="card-body">
@@ -62,10 +62,12 @@
                                                     <th class="thead"><input type="checkbox" id="selectbox"
                                                             class="select-checkbox"></th>
                                                     <!--<th>Id</th>-->
-                                                    <th>Project Name</th>
-                                                    <th>Address</th>
-                                                    <th>Work Order Date</th>
+                                                    <th>Name</th>
+                                                    <th>Email Address</th>
+                                                    <th>Contact Number</th>
+                                                    <th>Company</th>
                                                     <th>Status</th>
+                                                    <th>Type</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -73,22 +75,26 @@
                                                 @php
                                                     $id = 1;
                                                 @endphp
-                                                @foreach ($projectList as $projects)
+                                                @foreach ($users as $user)
                                                     <tr>
                                                         {{-- <td>{{ $id }}</td> --}}
                                                         <td></td>
-                                                        <td>{{ $projects->name }}</td>
-                                                        <td>{{ $projects->address }}</td>
-                                                        <td class="text-center">{{ $projects->po_date }}</td>
+                                                        <td>{{ $user->name }}</td>
+                                                        <td>{{ $user->email }}</td>
+                                                        <td>{{ $user->number }}</td>
+                                                        <td>{{ $user['projectInfo'] ? $user['projectInfo']->name : null }}</td>
                                                         <td class="text-center">
-                                                            <span
-                                                                class="badge {{ $projects->is_active ? 'badge-success' : 'badge-danger' }} px-2" style="font-size: 12px;">
-                                                                {{ $projects->is_active ? 'Active' : 'Inactive' }}</span>
+                                                            <h5><span
+                                                                class="badge {{ $user->is_active ? 'badge-secondary' : 'badge-danger' }} px-2" style="font-size: 12px;">
+                                                                {{ $user->is_active ? 'Active' : 'Inactive' }}</span></h5>
                                                         </td>
                                                         <td class="text-center">
-                                                            <a href="#" class="btn btn-sm btn-primary"><i
-                                                                    class="fas fa-file-invoice mr-1"></i> View</a>
-                                                            <a href="#" class="btn btn-sm btn-warning mx-1"><i
+                                                            <span
+                                                                class="badge {{ $user->for_client ? 'badge-success' : 'badge-primary' }} px-2" style="font-size: 12px;">
+                                                                {{ $user->for_client ? 'Client' : 'Admin' }}</span>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <a href="#" class="btn btn-sm btn-warning mr-1"><i
                                                                     class="fas fa-pencil-alt mr-1"></i> Edit</a>
                                                             <a href="#" class="btn btn-sm btn-danger"><i
                                                                     class="fas fa-trash-alt mr-1"></i> Delete</a>

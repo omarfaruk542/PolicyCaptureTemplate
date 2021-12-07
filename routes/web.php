@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\CompanyInfoController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CompanyInfoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +23,4 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/company', 'CompanyInfoController');
+Route::get('/register/userlist','Auth\UserController@index')->name('register/user');
