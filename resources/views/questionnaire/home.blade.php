@@ -27,7 +27,7 @@
                         <div class="card-title">
                             <h3 class="float-left">Questionnaire</h3>
                         </div>
-                        <span class="float-right mr-3 display-5 date">Date :</span>
+                        <span class="float-right mr-3 display-5 date">Date : {{ date('Y-m-d') }}</span>
                     </div>
                     <form role="form">
                         <div class="card-body">
@@ -37,16 +37,16 @@
                                     <label for="inputCompany" class="col-sm-2 col-form-label">Company Name</label>
                                     <div class="col-sm-10">
                                         <input class="form-control" list="companyName" id="inputCompany"
-                                            placeholder="Type Company Name" name="companyName">
-
+                                            placeholder="Type Company Name" name="companyName" value=" {{ $users->projectInfo->name }}" readonly>
+                                            <input type="hidden" name="comp_id" value="{{ $users->projectInfo->id }}">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <label for="inputAddress" class="col-sm-2 col-form-label">Company
                                         Address</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="inputAddress" rows="1"
-                                            placeholder="Type Company Address">
+                                        <input type="text" class="form-control" id="inputAddress" rows="1" name="companyaddress"
+                                            placeholder="Type Company Address" value=" {{ $users->projectInfo->address }}" readonly>
                                     </div>
                                 </div>
                             </div>

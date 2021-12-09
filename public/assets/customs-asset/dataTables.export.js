@@ -9,6 +9,7 @@ $(document).ready(function() {
         var table = $("#example1")
             .removeAttr("width")
             .DataTable({
+                pageLength : 7,
                 orderCellsTop: false,
                 orderable: false,
                 fixedHeader: false,

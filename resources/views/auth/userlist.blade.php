@@ -89,15 +89,15 @@
                                                                 {{ $user->is_active ? 'Active' : 'Inactive' }}</span></h5>
                                                         </td>
                                                         <td class="text-center">
-                                                            <span
+                                                            <h5><span
                                                                 class="badge {{ $user->for_client ? 'badge-success' : 'badge-primary' }} px-2" style="font-size: 12px;">
-                                                                {{ $user->for_client ? 'Client' : 'Admin' }}</span>
+                                                                {{ $user->for_client ? 'Client' : 'Admin' }}</span></h5>
                                                         </td>
                                                         <td class="text-center">
-                                                            <a href="#" class="btn btn-sm btn-warning mr-1"><i
-                                                                    class="fas fa-pencil-alt mr-1"></i> Edit</a>
+                                                            <a href="#" class="btn btn-sm btn-info mr-1"><i
+                                                                    class="fas fa-pencil-alt"></i></a>
                                                             <a href="#" class="btn btn-sm btn-danger"><i
-                                                                    class="fas fa-trash-alt mr-1"></i> Delete</a>
+                                                                    class="fas fa-trash-alt"></i></a>
                                                         </td>
                                                     </tr>
                                                     @php

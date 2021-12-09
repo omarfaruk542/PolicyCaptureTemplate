@@ -14,7 +14,7 @@ class UserController extends Controller
     }
 
     public function index(){
-        $users = User::with('projectInfo')->orderBy('id','DESC')->get();
+        $users = User::orderBy('id','DESC')->with('projectInfo')->get();
         // return $users;
         $totalUser = count($users);
         return view('auth.userlist',compact('users','totalUser'));
