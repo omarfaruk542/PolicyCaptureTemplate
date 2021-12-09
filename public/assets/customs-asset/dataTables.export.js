@@ -18,20 +18,9 @@ $(document).ready(function() {
                 autoWidth: false,
                 searching: true,
                 buttons: [
-                    "copy",
-                    "csv",
                     "excel",
                     "pdf",
-                    "print",
-                    "colvis",
-                    {
-                        exportOptions: {
-                            modifier: {
-                                selected: null
-                            },
-                            columns: ":visible:not(:last-child)"
-                        }
-                    }
+                    "print"
                 ],
                 select: true,
                 // scrollY: "300px",
