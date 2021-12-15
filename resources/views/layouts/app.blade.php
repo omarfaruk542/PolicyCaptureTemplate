@@ -111,8 +111,40 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="{{ asset('assets/customs-asset/sweetalert.on-delete.page-script.js') }}"></script>
 <script src="{{ asset('assets/customs-asset/upload_profile_image.js') }}"></script>
-<!-- Page specific script -->
+<!-- bs-custom-file-input -->
+<script src="{{ asset('assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
+<!-- house keeping data display -->
 <script src="{{ asset('assets/customs-asset/page_scripts.js') }}"></script>
-<script src="{{ asset('assets/customs-asset/pageFilter.js') }}"></script>
+<!-- Page Scroll script -->
+<script src="{{ asset('js/page-scroll.js') }}"></script>
+<!-- Grid View -->
+<script src="{{ asset('js/gridview.js') }}"></script>
+<!-- Page script -->
+<script src="{{ asset('js/custom-script.js') }}"></script>
+<script>
+$(document).ready(function(){
+   $(document).on('change','input[type="file"]',function(){
+    $('#uploadsuccss').text('');
+       files = this.files;
+       fileSize = Math.round(files[0].size / 1024);
+       if(files){
+        // console.log(files[0].name)
+        if(fileSize > 5120){
+            $('#uploaderror').removeClass('d-none');
+            $('#uploadsuccss').addClass('d-none');
+            $(this).val('');
+        } else {
+            $('#uploaderror').addClass('d-none');
+            $('#uploadsuccss').removeClass('d-none');
+            $('#uploadsuccss').append(`<strong>Success!</strong> file name: ${files[0].name}, size : ${fileSize} KB Selected`)
+        }
+
+       }
+
+   })
+})
+
+</script>
+
 </body>
 </html>

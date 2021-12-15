@@ -18,18 +18,55 @@
         </div>
     </div>
 </header>
+ <!-- Notification -->
+ @if (session('status'))
+ <div class="toast message" style="position: absolute; top: 60px; right: 0; z-index: 1070; width:300px;"
+     data-delay="5000">
+     <div class="toast-header bg-success">
+         <strong class="mr-auto">Success</strong>
+         <small>Just Now</small>
+         <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+         </button>
+     </div>
+     <div class="toast-body">
+         <div>
+             <i class="fas fa-check-square mr-2 text-success"></i>
+             <span>{{ session('status') }}</span>
+         </div>
+     </div>
+ </div>
+@endif
+<!-- Notification -->
 <section id="content">
     <div class="container container-sm">
+        <div class="row mt-4">
+            <div class="col col-10 col-md-12 mx-auto">
+                @if ($errors->any())
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+            @endif
+            </div>
+        </div>
         <div class="row">
             <div class="col col-10 col-md-12 mx-auto">
-                <div class="card card-outline card-warning my-4">
+                <div class="card card-outline card-warning my-2">
                     <div class="card-header py-1">
                         <div class="card-title">
                             <h3 class="float-left">Questionnaire</h3>
                         </div>
-                        <span class="float-right mr-3 display-5 date">Date : {{ date('Y-m-d') }}</span>
+                        <span class="float-right mr-3 display-5 date">Date : {{ date('m-d-Y') }}</span>
                     </div>
-                    <form role="form">
+                    <form role="form" action="{{ route('question.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
                         <div class="card-body">
                             {{-- Company Info --}}
                             <div class="form-group clearfix px-2">
@@ -37,8 +74,8 @@
                                     <label for="inputCompany" class="col-sm-2 col-form-label">Company Name</label>
                                     <div class="col-sm-10">
                                         <input class="form-control" list="companyName" id="inputCompany"
-                                            placeholder="Type Company Name" name="companyName" value=" {{ $users->projectInfo->name }}" readonly>
-                                            <input type="hidden" name="comp_id" value="{{ $users->projectInfo->id }}">
+                                            placeholder="Type Company Name" name="companyName" value=" {{ $users->projectInfo ? $users->projectInfo->name : null}}" readonly>
+                                            <input type="hidden" name="comp_id" value="{{ $users->projectInfo ? $users->projectInfo->id : null }}">
                                     </div>
                                 </div>
                                 <div class="row">
@@ -46,14 +83,14 @@
                                         Address</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" id="inputAddress" rows="1" name="companyaddress"
-                                            placeholder="Type Company Address" value=" {{ $users->projectInfo->address }}" readonly>
+                                            placeholder="Type Company Address" value=" {{ $users->projectInfo ? $users->projectInfo->address : null }}" readonly>
                                     </div>
                                 </div>
                             </div>
                             {{-- Company Info End --}}
                             {{-- Question : 01 --}}
                             <div class="card" style="box-shadow: none; border: 1px solid rgba(0, 0, 0, 0.15);">
-                                <div class="card-header py-1" data-card-widget="collapse">
+                                <div class="card-header py-1 @error('pims_upload') text-white bg-danger @enderror" data-card-widget="collapse">
                                     <h3 class="card-title">Employee Master Data</h3>
                                     <div class="card-tools">
                                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -67,13 +104,13 @@
                                             Excel
                                             template? </label>
                                         <div class="icheck-primary d-inline ml-3 mr-2">
-                                            <input class="btn1 btn-yes" type="radio" id="radioPrimary1" name="r1"
-                                                value="Yes">
+                                            <input class="btn1 btn-yes" type="radio" id="radioPrimary1" name="pims_upload"
+                                                value="yes">
                                             <label for="radioPrimary1">Yes, I want to upload</label>
                                         </div>
                                         <div class="icheck-primary d-inline">
-                                            <input class="btn2 btn-no" type="radio" id="radioPrimary2" name="r1"
-                                                value="No">
+                                            <input class="btn2 btn-no" type="radio" id="radioPrimary2" name="pims_upload"
+                                                value="no">
                                             <label for="radioPrimary2">No, I will do manually</label>
                                         </div>
                                         <div class="mt-2 showDetails" style="display: none;">
@@ -88,7 +125,7 @@
                             {{-- Question : 01 End --}}
                             {{-- Question : 02 --}}
                             <div class="card" style="box-shadow: none; border: 1px solid rgba(0, 0, 0, 0.15);">
-                                <div class="card-header py-1" data-card-widget="collapse">
+                                <div class="card-header py-1 @error('device_log') text-white bg-danger @enderror" data-card-widget="collapse">
                                     <h3 class="card-title">Attendance Log Data integration with KORMEE</h3>
                                     <div class="card-tools">
                                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -102,25 +139,33 @@
                                             Data with
                                             KORMEE System?</label>
                                         <div class="icheck-primary d-inline ml-3 mr-2">
-                                            <input class="btn3 btn-yes" type="radio" id="radioPrimary3" name="r2"
-                                                value="Yes">
+                                            <input class="btn3 btn-yes" type="radio" id="radioPrimary3" name="device_log"
+                                                value="yes">
                                             <label for="radioPrimary3">Yes</label>
                                         </div>
                                         <div class="icheck-primary d-inline">
-                                            <input class="btn4 btn-no" type="radio" id="radioPrimary4" name="r2"
-                                                value="No">
+                                            <input class="btn4 btn-no" type="radio" id="radioPrimary4" name="device_log"
+                                                value="no">
                                             <label for="radioPrimary4">No</label>
                                         </div>
                                         <div class="custom-file mt-2 showDetails" style="display: none;">
-                                            <div class="col col-md-6">
-                                                <input type="file" class="custom-file-input" id="customFile"
-                                                    accept=".rar,.zip,.txt,.xls,.mdb,.dat">
-                                                <label class="custom-file-label" for="customFile">Choose
-                                                    file</label>
+                                            <div class="row">
+                                                <div class="col col-md-6">
+                                                    <input type="file" class="custom-file-input" id="customFile"
+                                                        accept=".rar,.zip,.txt,.xls,.mdb,.dat" name="device_log_file" value="{{ old('device_log_file') }}">
+                                                    <label class="custom-file-label" for="customFile">Choose
+                                                        file</label>
+                                                </div>
+                                                <div class="col col-md-6">
+                                                    <div id="uploaderror" class="text-danger fade show d-none" role="alert">
+                                                        <strong>Error!</strong> File too Big, please select a file less than 5MB.
+                                                    </div>
+                                                    <div id="uploadsuccss" class="text-success fade show d-none" role="alert"></div>
+                                                </div>
                                             </div>
-                                            <div class="text-danger">Please upload Attendance Device output file
+                                            <div class="text-info">Please upload Attendance Device output file
                                                 format like
-                                                SQL Database, text, mdb, dat, excel etc. (Max file size-10MB)</div>
+                                                SQL Database, text, mdb, dat, excel etc. (Max file size-5MB)</div>
                                         </div>
                                     </div>
                                 </div>
@@ -128,7 +173,7 @@
                             {{-- Question : 02 End --}}
                             {{-- Question : 03 --}}
                             <div class="card" style="box-shadow: none; border: 1px solid rgba(0, 0, 0, 0.15);">
-                                <div class="card-header py-1" data-card-widget="collapse">
+                                <div class="card-header py-1 @error('shiftname.*') text-white bg-danger @enderror" data-card-widget="collapse">
                                     <h3 class="card-title">Shift Plan</h3>
                                     <div class="card-tools">
                                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -177,11 +222,11 @@
                                                             </td>
                                                             <td class="py-0 px-0" style="width: 5%;">
                                                                 <input type="number" class="w-100 border-0"
-                                                                    name="whour[]" value="">
+                                                                    name="whour[]" value="" step="any">
                                                             </td>
                                                             <td class="py-0 px-0" style="width: 10%;">
                                                                 <input type="time" class="w-100 border-0"
-                                                                    name="lgrace[]" value="">
+                                                                    name="lgrace[]" value="" >
                                                             </td>
                                                             <td class="py-0 px-0" style="width: 10%;">
                                                                 <input type="time" class="w-100 border-0"
@@ -197,11 +242,11 @@
                                                             </td>
                                                             <td class="py-0 px-0" style="width: 10%;">
                                                                 <input type="text" class="w-100 border-0"
-                                                                    name="not[]" value="">
+                                                                    name="not[]" value="" step="any">
                                                             </td>
                                                             <td class="py-0 px-0" style="width: 10%;">
                                                                 <input type="text" class="w-100 border-0"
-                                                                    name="eot[]" value="">
+                                                                    name="eot[]" value="" step="any">
                                                             </td>
                                                             <td class="py-0 px-0 w-auto">
                                                                 <i class="far fa-trash-alt text-danger delete"></i>
@@ -235,13 +280,13 @@
                                         <a href="javascript:void(0)" class="cursor-pointer btn-modal float-right"
                                         data-toggle="modal" data-target="#shiftrostermodal">For example, Click here</a>
                                         <div class="icheck-primary d-inline ml-3 mr-2">
-                                            <input class="btn3 btn-yes" type="radio" id="radioPrimary7" name="r4"
-                                                value="Yes">
+                                            <input class="btn3 btn-yes" type="radio" id="radioPrimary7" name="shift_roster"
+                                                value="yes">
                                             <label for="radioPrimary7">Yes</label>
                                         </div>
                                         <div class="icheck-primary d-inline">
-                                            <input class="btn4 btn-no" type="radio" id="radioPrimary8" name="r4"
-                                                value="No">
+                                            <input class="btn4 btn-no" type="radio" id="radioPrimary8" name="shift_roster"
+                                                value="no">
                                             <label for="radioPrimary8">No</label>
                                         </div>
                                         <div class="mt-2 showDetails" style="display: none;">
@@ -267,10 +312,10 @@
                                                                 name="shiftplan[]">
                                                         </td>
                                                         <td class="py-0 px-0 w-25">
-                                                            <input type="text" class="w-100 border-0" name="days[]">
+                                                            <input type="text" class="w-100 border-0" name="roster_days[]">
                                                         </td>
                                                         <td class="py-0 px-0" width="120px">
-                                                            <input type="number" class="w-100 border-0 text-center" name="seq[]">
+                                                            <input type="number" class="w-100 border-0 text-center" name="roster_seq[]">
                                                         </td>
                                                         <td class="py-0 px-0" style="width: 10%;">
                                                             <i class="far fa-trash-alt text-danger delete"></i>
@@ -302,17 +347,17 @@
                                         <label for="questions05">05. Any Over Time Rounding policy?</label>
                                         <div class="icheck-primary d-inline ml-3 mr-2">
                                             <input class="btn3 btn-yes" type="radio" id="radioPrimary9" name="r5"
-                                                value="Yes">
+                                                value="yes">
                                             <label for="radioPrimary9">Minute wise</label>
                                         </div>
                                         <div class="icheck-primary d-inline ml-3 mr-2">
                                             <input class="btn3 btn-yes" type="radio" id="radioPrimary9" name="r5"
-                                                value="Yes">
+                                                value="yes">
                                             <label for="radioPrimary9">Category Wise</label>
                                         </div>
                                         <div class="icheck-primary d-inline">
                                             <input class="btn4 btn-no" type="radio" id="radioPrimary10" name="r5"
-                                                value="No">
+                                                value="no">
                                             <label for="radioPrimary10">N/A</label>
                                         </div>
                                         <div class="mt-2 showDetails" style="display: none;">
@@ -375,12 +420,12 @@
                                         <label for="questions06">06. Do you have multiple OT Rate policy?</label>
                                         <div class="icheck-primary d-inline ml-3 mr-2">
                                             <input class="btn3 btn-yes" type="radio" id="radioPrimary11" name="r6"
-                                                value="Yes">
+                                                value="yes">
                                             <label for="radioPrimary11">Yes</label>
                                         </div>
                                         <div class="icheck-primary d-inline">
                                             <input class="btn4 btn-no" type="radio" id="radioPrimary12" name="r6"
-                                                value="No">
+                                                value="no">
                                             <label for="radioPrimary12">No</label>
                                         </div>
                                         <div class="mt-2 showDetails" style="display: none;">
@@ -439,12 +484,12 @@
                                         <label for="questions07">07. What type of Leave Calender do you use?</label>
                                         {{-- <div class="icheck-primary d-inline ml-3 mr-2">
                                             <input class="btn3 btn-yes" type="radio" id="radioPrimary13" name="r7"
-                                                value="Yes">
+                                                value="yes">
                                             <label for="radioPrimary13">Yes</label>
                                         </div>
                                         <div class="icheck-primary d-inline">
                                             <input class="btn4 btn-no" type="radio" id="radioPrimary14" name="r7"
-                                                value="No">
+                                                value="no">
                                             <label for="radioPrimary14">No</label>
                                         </div> --}}
                                         <div class="mt-2 showDetails">
@@ -504,12 +549,12 @@
                                             allocation?</label>
                                         <div class="icheck-primary d-inline ml-3 mr-2">
                                             <input class="btn3 btn-yes" type="radio" id="radioPrimary15" name="r8"
-                                                value="Yes">
+                                                value="yes">
                                             <label for="radioPrimary15">Yes</label>
                                         </div>
                                         <div class="icheck-primary d-inline">
                                             <input class="btn4 btn-no" type="radio" id="radioPrimary16" name="r8"
-                                                value="No">
+                                                value="no">
                                             <label for="radioPrimary16">No</label>
                                         </div>
                                         <div class="mt-2 showDetails" style="display: none;">
@@ -640,12 +685,12 @@
                                         <label for="questions09">09. Do you have Leave Encashment policy?</label>
                                         <div class="icheck-primary d-inline ml-3 mr-2">
                                             <input class="btn3 btn-yes" type="radio" id="radioPrimary17" name="r9"
-                                                value="Yes">
+                                                value="yes">
                                             <label for="radioPrimary17">Yes</label>
                                         </div>
                                         <div class="icheck-primary d-inline">
                                             <input class="btn4 btn-no" type="radio" id="radioPrimary18" name="r9"
-                                                value="No">
+                                                value="no">
                                             <label for="radioPrimary18">No</label>
                                         </div>
                                         <div class="mt-2 showDetails" style="display: none;">
@@ -718,12 +763,12 @@
                                         <label for="questions10">10. Do you have maternity leave policy?</label>
                                         <div class="icheck-primary d-inline ml-3 mr-2">
                                             <input class="btn3 btn-yes" type="radio" id="radioPrimary19" name="r10"
-                                                value="Yes">
+                                                value="yes">
                                             <label for="radioPrimary19">Yes</label>
                                         </div>
                                         <div class="icheck-primary d-inline">
                                             <input class="btn4 btn-no" type="radio" id="radioPrimary20" name="r10"
-                                                value="No">
+                                                value="no">
                                             <label for="radioPrimary20">No</label>
                                         </div>
                                         <div class="mt-2 showDetails" style="display: none;">
@@ -1166,12 +1211,12 @@
                                         </label>
                                         <div class="icheck-primary d-inline ml-3 mr-2">
                                             <input class="btn1 btn-yes" type="radio" id="radioPrimary1" name="r1"
-                                                value="Yes">
+                                                value="yes">
                                             <label for="radioPrimary1">Yes</label>
                                         </div>
                                         <div class="icheck-primary d-inline">
                                             <input class="btn2 btn-no" type="radio" id="radioPrimary2" name="r1"
-                                                value="No">
+                                                value="no">
                                             <label for="radioPrimary2">No</label>
                                         </div>
                                         <div class="mt-2 showDetails">
@@ -1348,18 +1393,26 @@
                                     <div class="form-group clearfix mb-0">
                                         <label for="questions06">18. Do you follow the Bangladesh Income Tax Ordinance?</label>
                                         <div class="icheck-primary d-inline ml-3 mr-2">
-                                            <input class="btn1 btn-yes" type="radio" id="radioPrimary1" name="r1"
-                                                value="Yes">
-                                            <label for="radioPrimary1">Yes</label>
+                                            <input class="btn1 btn-yes" type="radio" id="tax_policy_yes" name="tax_policy"
+                                                value="yes">
+                                            <label for="tax_policy_yes">Yes</label>
                                         </div>
                                         <div class="icheck-primary d-inline">
-                                            <input class="btn2 btn-no" type="radio" id="radioPrimary2" name="r1"
-                                                value="No">
-                                            <label for="radioPrimary2">No</label>
+                                            <input class="btn2 btn-no" type="radio" id="tax_policy_no" name="tax_policy"
+                                                value="no">
+                                            <label for="tax_policy_no">No</label>
                                         </div>
-                                        <div class="mt-2 showDetails">
-                                            <input type="file" class="form-control" placeholder="Upload from Excel">
-                                            <input type="file" class="form-control" placeholder="Upload Policy">
+                                        <div class="mt-2 showDetails" style="display: none;">
+                                            <div class="col mb-1">
+                                                <input type="file" class="custom-file-input" id="ordinanceCustomFile"
+                                                    accept=".rar,.zip,.xls,.pdf" name="it_ordinance">
+                                                <label class="custom-file-label" for="ordinanceCustomFile">Upload Income Tax Ordinance</label>
+                                            </div>
+                                            <div class="col">
+                                                <input type="file" class="custom-file-input" id="itCalculationFile"
+                                                    accept=".xls" name="it_policy">
+                                                <label class="custom-file-label" for="itCalculationFile">Upload Sample Income Tax Calculation</label>
+                                            </div>
                                         </div>
 
                                 </div>

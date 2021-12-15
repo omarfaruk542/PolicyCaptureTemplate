@@ -10,7 +10,7 @@ $(document).ready(function () {
         var btnName = $(this).attr("id");
         var btn = $(`input[id="` + btnName + `"]`);
         var root = $(btn).parents(".icheck-primary").parent();
-        if ($(btn).val() == "Yes" || $(btn).val() == "crossmonth") {
+        if ($(btn).val() == "yes" || $(btn).val() == "crossmonth") {
             $(root).find(".showDetails").fadeIn("slow");
         } else {
             $(root).find(".showDetails").fadeOut(500);
