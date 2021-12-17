@@ -50,10 +50,10 @@ $(document).ready(function () {
                         <input type="text" class="w-100 border-0" name="shiftplan[]">
                     </td>
                     <td class="py-0 px-0" style="width: 10%;">
-                        <input type="text" class="w-100 border-0" name="days[]">
+                        <input type="text" class="w-100 border-0" name="roster_days[]">
                     </td>
                     <td class="py-0 px-0" width="120px">
-                        <input type="number" class="w-100 border-0 text-center" name="seq[]">
+                        <input type="number" class="w-100 border-0 text-center" name="roster_seq[]">
                     </td>
                     <td class="py-0 px-0" style="width: 10%;">
                         <i class="far fa-trash-alt text-danger delete"></i>
@@ -66,16 +66,16 @@ $(document).ready(function () {
         e.preventDefault();
         var html = `<tr>
                     <td class="py-0 px-0 w-25">
-                        <input type="text" class="w-100 border-0" name="category[]">
+                        <input type="text" class="w-100 border-0" name="roundingtype[]">
                     </td>
                     <td class="py-0 px-0 w-25">
-                        <input type="number" class="w-100 border-0" name="min[]">
+                        <input type="text" class="w-100 border-0" name="min[]" step="any">
                     </td>
                     <td class="py-0 px-0 w-25">
-                        <input type="number" class="w-100 border-0" name="max[]">
+                        <input type="text" class="w-100 border-0" name="max[]" step="any">
                     </td>
                     <td class="py-0 px-0 w-25">
-                        <input type="number" class="w-100 border-0" name="otmin[]">
+                        <input type="number" class="w-100 border-0" name="otmin[]" step="any">
                     </td>
                     <td class="py-0 px-0" style="width: 10%;">
                         <i class="far fa-trash-alt text-danger delete"></i>

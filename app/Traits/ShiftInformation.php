@@ -9,6 +9,7 @@ trait ShiftInformation
 {
     public function storeShiftPlanAns($data)
     {
+        $userid = Auth::user()->id;
         $shiftPlans = [];
         $shiftPlans = [
             'shiftname'  => $data['shiftname'],
@@ -28,7 +29,6 @@ trait ShiftInformation
                 $shift[$k][$id] = $v;
             }
         }
-
         foreach($shift as $key=>$values){
             ShiftPlan::create([
                 'com_id'     => $data->comp_id,
@@ -42,7 +42,7 @@ trait ShiftInformation
                 'lin'        => $values['lin'],
                 'not'        => $values['not'],
                 'eot'        => $values['eot'],
-                'added_by'   => Auth::user()->id,
+                'added_by'   => $userid,
                 'updated_by' => null
                 ]);
         }

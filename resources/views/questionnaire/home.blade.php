@@ -266,7 +266,7 @@
                             {{-- Question : 03 End --}}
                             {{-- Question : 04 --}}
                             <div class="card" style="box-shadow: none; border: 1px solid rgba(0, 0, 0, 0.15);">
-                                <div class="card-header py-1" data-card-widget="collapse">
+                                <div class="card-header py-1 @error('shift_roster') text-white bg-danger @enderror" data-card-widget="collapse">
                                     <h3 class="card-title">Shift Roster</h3>
                                     <div class="card-tools">
                                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -345,56 +345,28 @@
                                 <div class="card-body py-2">
                                     <div class="form-group clearfix mb-0">
                                         <label for="questions05">05. Any Over Time Rounding policy?</label>
+                                        <a href="javascript:void(0)" class="cursor-pointer btn-modal float-right show-minutemodal"
+                                        data-toggle="modal" data-target="#minuteOTRoundnmodel" style="display: none;">For example, Click here</a>
+                                        <a href="javascript:void(0)" class="cursor-pointer btn-modal float-right show-categorymodal"
+                                        data-toggle="modal" data-target="#categoryOTRoundnmodel" style="display: none;">For example, Click here</a>
                                         <div class="icheck-primary d-inline ml-3 mr-2">
-                                            <input class="btn3 btn-yes" type="radio" id="radioPrimary9" name="r5"
-                                                value="yes">
+                                            <input class="btn3 btn-yes" type="radio" id="radioPrimary9" name="ot_round"
+                                                value="minute_wise">
                                             <label for="radioPrimary9">Minute wise</label>
                                         </div>
                                         <div class="icheck-primary d-inline ml-3 mr-2">
-                                            <input class="btn3 btn-yes" type="radio" id="radioPrimary9" name="r5"
-                                                value="yes">
-                                            <label for="radioPrimary9">Category Wise</label>
+                                            <input class="btn3 btn-yes" type="radio" id="radioPrimary10" name="ot_round"
+                                                value="category_wise">
+                                            <label for="radioPrimary10">Category Wise</label>
                                         </div>
                                         <div class="icheck-primary d-inline">
-                                            <input class="btn4 btn-no" type="radio" id="radioPrimary10" name="r5"
+                                            <input class="btn4 btn-no" type="radio" id="radioPrimary11" name="ot_round"
                                                 value="no">
-                                            <label for="radioPrimary10">N/A</label>
+                                            <label for="radioPrimary11">N/A</label>
                                         </div>
                                         <div class="mt-2 showDetails" style="display: none;">
                                             <table class="table table-bordered text-center"
                                                 style="font-size: 14px;">
-                                                <thead>
-                                                    <tr>
-                                                        <th class="py-1">Category</th>
-                                                        <th class="py-1">Minimum Minutes</th>
-                                                        <th class="py-1">Maximum Minutes</th>
-                                                        <th class="py-1">OT Minutes</th>
-                                                        <th class="py-1">Action</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody class="ot-rounding-body">
-                                                    <tr>
-                                                        <td class="py-0 px-0 w-25">
-                                                            <input type="text" class="w-100 border-0"
-                                                                name="category[]">
-                                                        </td>
-                                                        <td class="py-0 px-0 w-25">
-                                                            <input type="number" class="w-100 border-0"
-                                                                name="min[]">
-                                                        </td>
-                                                        <td class="py-0 px-0 w-25">
-                                                            <input type="number" class="w-100 border-0"
-                                                                name="max[]">
-                                                        </td>
-                                                        <td class="py-0 px-0 w-25">
-                                                            <input type="number" class="w-100 border-0"
-                                                                name="otmin[]">
-                                                        </td>
-                                                        <td class="py-0 px-0" style="width: 10%;">
-                                                            <i class="far fa-trash-alt text-danger delete"></i>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
                                             </table>
                                             <div style="margin-top: -10px;">
                                                 <button class="btn btn-sm btn-info add-ot-round">Add <i
@@ -1497,6 +1469,8 @@
 {{-- Example Model --}}
 @include('modal.shiftplan')
 @include('modal.shiftrule')
+@include('modal.MinuteWiseOTRound')
+@include('modal.CategoryWiseOTRound')
 
 {{-- Scroll to Top Button --}}
 <div class="float-right">

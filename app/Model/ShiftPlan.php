@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class ShiftPlan extends Model
 {
     protected $fillable = [
-        'com_id','shiftname', 'intime', 'outtime','whour','lgrace','eograce','lout','lin','not','eot'
+        'com_id','shiftname', 'intime', 'outtime','whour','lgrace','eograce','lout','lin','not','eot','added_by','updated_by'
     ];
 }
