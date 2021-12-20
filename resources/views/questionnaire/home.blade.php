@@ -334,7 +334,7 @@
                             {{-- Question : 04 End --}}
                             {{-- Question : 05 --}}
                             <div class="card" style="box-shadow: none; border: 1px solid rgba(0, 0, 0, 0.15);">
-                                <div class="card-header py-1 @error('shift_roster') text-white bg-danger @enderror" data-card-widget="collapse">
+                                <div class="card-header py-1 @error('ot_round') text-white bg-danger @enderror" data-card-widget="collapse">
                                     <h3 class="card-title">Over Time Rounding</h3>
                                     <div class="card-tools">
                                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -379,7 +379,7 @@
                             {{-- Question : 05 End --}}
                             {{-- Question : 06 --}}
                             <div class="card" style="box-shadow: none; border: 1px solid rgba(0, 0, 0, 0.15);">
-                                <div class="card-header py-1 @error('shift_roster') text-white bg-danger @enderror" data-card-widget="collapse">
+                                <div class="card-header py-1 @error('ot_rate') text-white bg-danger @enderror" data-card-widget="collapse">
                                     <h3 class="card-title">Over Time Rate</h3>
                                     <div class="card-tools">
                                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -445,7 +445,7 @@
 
                             {{-- Question : 07 --}}
                             <div class="card" style="box-shadow: none; border: 1px solid rgba(0, 0, 0, 0.15);">
-                                <div class="card-header py-1" data-card-widget="collapse">
+                                <div class="card-header py-1 @error('lv_cal_rule.*') text-white bg-danger @enderror" data-card-widget="collapse">
                                     <h3 class="card-title">Leave Calendar</h3>
                                     <div class="card-tools">
                                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -478,7 +478,7 @@
                                                         <th class="py-1">Action</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody class="ot-rate-body">
+                                                <tbody class="lv-calender-body">
                                                     <tr>
                                                         <td class="py-0 px-0 w-25">
                                                             <input type="text" class="w-100 border-0"
@@ -503,7 +503,7 @@
                                                 </tbody>
                                             </table>
                                             <div style="margin-top: -10px;">
-                                                <button class="btn btn-sm btn-info add-ot-rate">Add <i
+                                                <button class="btn btn-sm btn-info add-lv-calender">Add <i
                                                         class="fas fa-plus"></i></button>
                                             </div>
                                         </div>
@@ -527,16 +527,27 @@
                                         <label for="questions08">08. Do you maintain multiple Leave types &
                                             allocation?</label>
                                         <div class="icheck-primary d-inline ml-3 mr-2">
-                                            <input class="btn3 btn-yes" type="radio" id="radioPrimary15" name="r8"
+                                            <input class="btn3 btn-yes" type="radio" id="radioPrimary15" name="lv_allocation"
                                                 value="yes">
                                             <label for="radioPrimary15">Yes</label>
                                         </div>
                                         <div class="icheck-primary d-inline">
-                                            <input class="btn4 btn-no" type="radio" id="radioPrimary16" name="r8"
+                                            <input class="btn4 btn-no" type="radio" id="radioPrimary16" name="lv_allocation"
                                                 value="no">
                                             <label for="radioPrimary16">No</label>
                                         </div>
                                         <div class="mt-2 showDetails" style="display: none;">
+                                            <div class="form-group row">
+                                                <label for="lv_type" class="col-sm-2">Select Leave Type :</label>
+                                                <select name="lv_type" id="lv_type" class="custom-select custom-select-sm col-sm-3 mr-4">
+                                                    <option value="0" selected disabled>Select Leave Type</option>
+                                                    <option value="cl">CL</option>
+                                                    <option value="sl">SL</option>
+                                                    <option value="el">EL</option>
+                                                </select>
+                                                <button class="btn btn-sm btn-info add-lv-policy col-sm-1">Add <i
+                                                    class="fas fa-plus"></i></button>
+                                            </div>
                                             <table class="table table-bordered text-center"
                                                 style="font-size: 14px;">
                                                 <thead>
@@ -553,19 +564,19 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody class="lv-policy-body">
-                                                    <tr>
+                                                    {{-- <tr>
                                                         <td class="py-0 px-0" width="10%">
-                                                            <input type="text" class="w-100 border-0" name="type[]"
+                                                            <input type="text" class="w-100 border-0" name="lv_type[]"
                                                                 style="height: 24px;">
                                                         </td>
                                                         <td class="py-0 px-0" width="10%">
-                                                            <input type="text" class="w-100 border-0" name="days[]"
+                                                            <input type="text" class="w-100 border-0" name="lv_days[]"
                                                                 style="height: 24px;">
                                                         </td>
                                                         <td class="py-0 px-0" width="15%">
                                                             <div class="custom-control custom-radio d-inline mr-2">
                                                                 <input class="custom-control-input" type="radio"
-                                                                    id="rcredit1" name="credit" value="boy">
+                                                                    id="rcredit1" name="lv_credit" value="boy">
                                                                 <label title="Beginning of the Year" for="rcredit1"
                                                                     class="custom-control-label"
                                                                     style="font-size: 14px; cursor: pointer;">BOY
@@ -573,7 +584,7 @@
                                                             </div>
                                                             <div class="custom-control custom-radio d-inline">
                                                                 <input type="radio" class="custom-control-input"
-                                                                    name="credit" id="rcredit2" value="eoy">
+                                                                    name="lv_credit" id="rcredit2" value="eoy">
                                                                 <label title="End of the Year" for="rcredit2"
                                                                     class="custom-control-label"
                                                                     style="font-size: 14px; cursor: pointer;">EOY
@@ -583,35 +594,35 @@
                                                         <td class="py-0 px-0" width="22%">
                                                             <div class="custom-control custom-radio d-inline mr-2">
                                                                 <input type="radio" class="custom-control-input"
-                                                                    name="calbasis" id="rbasis1" value="doj">
+                                                                    name="lv_calbasis" id="rbasis1" value="doj">
                                                                 <label title="Date of Joining" for="rbasis1"
                                                                     class="custom-control-label"
                                                                     style="font-size: 14px; cursor: pointer;">DOJ</label>
                                                             </div>
                                                             <div class="custom-control custom-radio d-inline">
                                                                 <input type="radio" class="custom-control-input"
-                                                                    name="calbasis" id="rbasis2" value="doj">
+                                                                    name="lv_calbasis" id="rbasis2" value="doj">
                                                                 <label title="Date of confirmation" for="rbasis2"
                                                                     class="custom-control-label"
                                                                     style="font-size: 14px; cursor: pointer;">DOC</label>
                                                             </div>
                                                             <div class="d-inline ml-2">
                                                                 <input type="text" class="w-25 border-1"
-                                                                    name="daysafter[]" placeholder="Days after"
+                                                                    name="lv_daysafter[]" placeholder="Days after"
                                                                     style="height: 24px;">
                                                             </div>
                                                         </td>
                                                         <td class="py-0 px-0" width="15%">
                                                             <div class="custom-control custom-radio d-inline mr-2">
                                                                 <input type="radio" class="custom-control-input"
-                                                                    name="caltype" id="rcaltype1" value="cc">
+                                                                    name="lv_caltype" id="rcaltype1" value="cc">
                                                                 <label title="Sandwitch on Work Off / Holiday" for="rcaltype1"
                                                                     class="custom-control-label"
                                                                     style="font-size: 14px; cursor: pointer;">CC</label>
                                                             </div>
                                                             <div class="custom-control custom-radio d-inline">
                                                                 <input type="radio" class="custom-control-input"
-                                                                    name="caltype" id="rcaltype2" value="ec">
+                                                                    name="lv_caltype" id="rcaltype2" value="ec">
                                                                 <label title="Non-Sandwitch on Work Off / Holiday" for="rcaltype2"
                                                                     class="custom-control-label"
                                                                     style="font-size: 14px; cursor: pointer;">EC</label>
@@ -620,30 +631,29 @@
                                                         <td class="py-0 px-0" width="13%">
                                                             <div class="custom-control custom-checkbox d-inline">
                                                                 <input class="custom-control-input" type="checkbox"
-                                                                    id="prodata" name="prodata" value="prodata">
+                                                                    id="prodata" name="lv_prodata[]" value="prodata">
                                                                 <label for="prodata" class="custom-control-label"
                                                                     title="First year proportionate"></label>
                                                             </div>
                                                         </td>
                                                         <td class="py-0 px-0" width="10%">
                                                             <input type="text" class="w-100 border-0"
-                                                                name="lvlimit[]" style="height: 24px;">
+                                                                name="lv_limit[]" style="height: 24px;">
                                                         </td>
-
                                                         <td class="py-0 px-0" width="15%">
-                                                            <input type="text" class="w-100 border-0" name="cfw[]"
+                                                            <input type="text" class="w-100 border-0" name="lv_cfw[]"
                                                                 style="height: 24px;">
                                                         </td>
                                                         <td class="py-0 px-0" style="width: 5%;">
                                                             <i class="far fa-trash-alt text-danger delete"></i>
                                                         </td>
-                                                    </tr>
+                                                    </tr> --}}
                                                 </tbody>
                                             </table>
-                                            <div style="margin-top: -10px;">
+                                            {{-- <div style="margin-top: -10px;">
                                                 <button class="btn btn-sm btn-info add-lv-policy">Add <i
                                                         class="fas fa-plus"></i></button>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                     </div>
                                 </div>

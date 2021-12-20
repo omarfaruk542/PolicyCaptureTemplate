@@ -47,3 +47,7 @@
 .logo2 {
     width: 25px !important;
 }
+
+.lv-policy-body input::placeholder {
+    font-size: 9px !important;
+}

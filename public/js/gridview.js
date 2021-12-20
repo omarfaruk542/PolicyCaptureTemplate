@@ -1,5 +1,6 @@
 $(document).ready(function () {
     var count = 2;
+    const leavetype = [];
     $('.add-shift').click(function(e){
         e.preventDefault();
         var html = `<tr>
@@ -106,26 +107,57 @@ $(document).ready(function () {
         $('.ot-rate-body').append(html);
     })
 
+    $('.add-lv-calender').click(function (e) {
+        e.preventDefault();
+        var html = `<tr>
+                    <td class="py-0 px-0 w-25">
+                    <input type="text" class="w-100 border-0"
+                        name="lv_cal_rule[]">
+                    </td>
+                    <td class="py-0 px-0 w-25">
+                        <input type="date" class="w-100 border-0"
+                            name="lv_from[]">
+                    </td>
+                    <td class="py-0 px-0 w-25">
+                        <input type="date" class="w-100 border-0"
+                            name="lv_to[]">
+                    </td>
+                    <td class="py-0 px-0 w-25">
+                        <input type="text" class="w-100 border-0"
+                            name="lv_remarks[]">
+                    </td>
+                    <td class="py-0 px-0" style="width: 10%;">
+                        <i class="far fa-trash-alt text-danger delete"></i>
+                    </td>
+                </tr>`;
+        $('.lv-calender-body').append(html);
+    })
+
     $('.add-lv-policy').click(function (e) {
         e.preventDefault();
         count = count + 2;
+        // var leavetype = $('#lv_type').val();
+        var leavevalue = $('#lv_type').find(":selected").val();
+        var leavename = $('#lv_type').find(":selected").text();
+        leavetype.push(leavevalue);
+
         var html = `<tr>
                     <td class="py-0 px-0" width="10%">
-                        <input type="text" class="w-100 border-0" name="type[]"
-                        style="height: 24px;">
+                        <input type="text" class="w-100 border-0" name="lv_name[]" value="`+leavename+`" disabled
+                        style="height: 24px; padding: 0 5px;">
                     </td>
                     <td class="py-0 px-0" width="10%">
-                        <input type="text" class="w-100 border-0" name="days[]"
+                        <input type="text" class="w-100 border-0" name="lv_days[]"
                         style="height: 24px;">
                     </td>
                     <td class="py-0 px-0" width="15%">
                         <div class="custom-control custom-radio d-inline mr-2">
-                            <input class="custom-control-input" type="radio" id="rcredit`+(count)+`" name="credit`+count+`" value="boy">
+                            <input class="custom-control-input" type="radio" id="rcredit`+(count)+`" name="lv_credit`+count+`" value="boy">
                             <label title="Beginning of the Year" for="rcredit`+(count)+`" class="custom-control-label"
                             style="font-size: 14px; cursor: pointer;">BOY </label>
                         </div>
                         <div class="custom-control custom-radio d-inline">
-                            <input type="radio" class="custom-control-input" name="credit`+(count)+`" id="rcredit`+(count+1)+`" value="eoy">
+                            <input type="radio" class="custom-control-input" name="lv_credit`+(count)+`" id="rcredit`+(count+1)+`" value="eoy">
                             <label title="End of the Year" for="rcredit`+(count+1)+`" class="custom-control-label"
                             style="font-size: 14px; cursor: pointer;">EOY </label>
                         </div>
@@ -169,15 +201,25 @@ $(document).ready(function () {
                             title="First year proportionate"></label>
                         </div>
                     </td>
+                    <td class="py-0 px-0" width="10%">
+                        <input type="text" class="w-100 border-0"
+                            name="lv_limit[]" style="height: 24px;">
+                    </td>
                     <td class="py-0 px-0" width="15%">
-                        <input type="text" class="w-100 border-0" name="cfw[]"
+                        <input type="text" class="w-100 border-0" name="lv_cfw[]"
                         style="height: 24px;">
                     </td>
                     <td class="py-0 px-0" style="width: 5%;">
                         <i class="far fa-trash-alt text-danger delete"></i>
                     </td>
                 </tr>`;
-        $('.lv-policy-body').append(html);
+
+            if(leavetype == null || leavetype == ""){
+                alert('Please select leave type');
+            } else {
+                $('.lv-policy-body').append(html);
+            }
+
     })
     $('.add-en-policy').click(function (e) {
         e.preventDefault();
