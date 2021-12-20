@@ -87,18 +87,21 @@ $(document).ready(function () {
     $('.add-ot-rate').click(function (e) {
         e.preventDefault();
         var html = `<tr>
-                    <td class="py-0 px-0 w-25">
-                        <input type="text" class="w-100 border-0" name="otrule[]">
-                    </td>
-                    <td class="py-0 px-0 w-25">
-                        <input type="text" class="w-100 border-0" name="otrate[]">
-                    </td>
-                    <td class="py-0 px-0 w-25">
-                        <input type="text" class="w-100 border-0" name="remarks[]">
-                    </td>
-                    <td class="py-0 px-0" style="width: 10%;">
-                        <i class="far fa-trash-alt text-danger delete"></i>
-                    </td>
+                        <td class="py-0 px-0 w-25">
+                        <input type="text" class="w-100 border-0"
+                            name="ot_rule[]">
+                        </td>
+                        <td class="py-0 px-0 w-25">
+                            <input type="text" class="w-100 border-0"
+                                name="ot_formula[]">
+                        </td>
+                        <td class="py-0 px-0 w-25">
+                            <input type="text" class="w-100 border-0"
+                                name="ot_remarks[]">
+                        </td>
+                        <td class="py-0 px-0" style="width: 10%;">
+                            <i class="far fa-trash-alt text-danger delete"></i>
+                        </td>
                 </tr>`;
         $('.ot-rate-body').append(html);
     })

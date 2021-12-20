@@ -334,7 +334,7 @@
                             {{-- Question : 04 End --}}
                             {{-- Question : 05 --}}
                             <div class="card" style="box-shadow: none; border: 1px solid rgba(0, 0, 0, 0.15);">
-                                <div class="card-header py-1" data-card-widget="collapse">
+                                <div class="card-header py-1 @error('shift_roster') text-white bg-danger @enderror" data-card-widget="collapse">
                                     <h3 class="card-title">Over Time Rounding</h3>
                                     <div class="card-tools">
                                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -379,7 +379,7 @@
                             {{-- Question : 05 End --}}
                             {{-- Question : 06 --}}
                             <div class="card" style="box-shadow: none; border: 1px solid rgba(0, 0, 0, 0.15);">
-                                <div class="card-header py-1" data-card-widget="collapse">
+                                <div class="card-header py-1 @error('shift_roster') text-white bg-danger @enderror" data-card-widget="collapse">
                                     <h3 class="card-title">Over Time Rate</h3>
                                     <div class="card-tools">
                                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -389,16 +389,18 @@
                                 </div>
                                 <div class="card-body py-2">
                                     <div class="form-group clearfix mb-0">
-                                        <label for="questions06">06. Do you have multiple OT Rate policy?</label>
+                                        <label for="questions06">06. Do you have multiple overtime Rate policy?</label>
+                                        <a href="javascript:void(0)" class="cursor-pointer btn-modal float-right show-minutemodal"
+                                        data-toggle="modal" data-target="#overTimeRatenmodel">For example, Click here</a>
                                         <div class="icheck-primary d-inline ml-3 mr-2">
-                                            <input class="btn3 btn-yes" type="radio" id="radioPrimary11" name="r6"
+                                            <input class="btn3 btn-yes" type="radio" id="radioPrimary12" name="ot_rate"
                                                 value="yes">
-                                            <label for="radioPrimary11">Yes</label>
+                                            <label for="radioPrimary12">Yes</label>
                                         </div>
                                         <div class="icheck-primary d-inline">
-                                            <input class="btn4 btn-no" type="radio" id="radioPrimary12" name="r6"
+                                            <input class="btn4 btn-no" type="radio" id="radioPrimary13" name="ot_rate"
                                                 value="no">
-                                            <label for="radioPrimary12">No</label>
+                                            <label for="radioPrimary13">No</label>
                                         </div>
                                         <div class="mt-2 showDetails" style="display: none;">
                                             <table class="table table-bordered text-center"
@@ -415,15 +417,15 @@
                                                     <tr>
                                                         <td class="py-0 px-0 w-25">
                                                             <input type="text" class="w-100 border-0"
-                                                                name="otrule[]">
+                                                                name="ot_rule[]">
                                                         </td>
                                                         <td class="py-0 px-0 w-25">
                                                             <input type="text" class="w-100 border-0"
-                                                                name="otrate[]">
+                                                                name="ot_formula[]">
                                                         </td>
                                                         <td class="py-0 px-0 w-25">
                                                             <input type="text" class="w-100 border-0"
-                                                                name="remarks[]">
+                                                                name="ot_remarks[]">
                                                         </td>
                                                         <td class="py-0 px-0" style="width: 10%;">
                                                             <i class="far fa-trash-alt text-danger delete"></i>
@@ -472,6 +474,7 @@
                                                         <th class="py-1">Calendar Type</th>
                                                         <th class="py-1">From Date</th>
                                                         <th class="py-1">To Date</th>
+                                                        <th class="py-1">Remarks</th>
                                                         <th class="py-1">Action</th>
                                                     </tr>
                                                 </thead>
@@ -479,15 +482,19 @@
                                                     <tr>
                                                         <td class="py-0 px-0 w-25">
                                                             <input type="text" class="w-100 border-0"
-                                                                name="otrule[]">
+                                                                name="lv_cal_rule[]">
                                                         </td>
                                                         <td class="py-0 px-0 w-25">
                                                             <input type="date" class="w-100 border-0"
-                                                                name="otrate[]">
+                                                                name="lv_from[]">
+                                                        </td>
+                                                        <td class="py-0 px-0 w-25">
+                                                            <input type="date" class="w-100 border-0"
+                                                                name="lv_to[]">
                                                         </td>
                                                         <td class="py-0 px-0 w-25">
                                                             <input type="text" class="w-100 border-0"
-                                                                name="remarks[]">
+                                                                name="lv_remarks[]">
                                                         </td>
                                                         <td class="py-0 px-0" style="width: 10%;">
                                                             <i class="far fa-trash-alt text-danger delete"></i>
@@ -1115,7 +1122,7 @@
                             </div>
                             {{-- Question : 14 End --}}
                             {{-- Question : 15 --}}
-                            <div class="card" style="box-shadow: none; border: 1px solid rgba(0, 0, 0, 0.15);">
+                            {{-- <div class="card" style="box-shadow: none; border: 1px solid rgba(0, 0, 0, 0.15);">
                                 <div class="card-header py-1" data-card-widget="collapse">
                                     <h3 class="card-title">Over Time Amount</h3>
                                     <div class="card-tools">
@@ -1165,7 +1172,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                             {{-- Question : 15 End --}}
                             {{-- Question : 16 --}}
                             <div class="card" style="box-shadow: none; border: 1px solid rgba(0, 0, 0, 0.15);">
@@ -1471,6 +1478,7 @@
 @include('modal.shiftrule')
 @include('modal.MinuteWiseOTRound')
 @include('modal.CategoryWiseOTRound')
+@include('modal.OTRateModal')
 
 {{-- Scroll to Top Button --}}
 <div class="float-right">

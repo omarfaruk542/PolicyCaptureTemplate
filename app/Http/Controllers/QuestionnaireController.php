@@ -10,6 +10,7 @@ use Illuminate\Validation\Rule;
 use App\Traits\DeviceIntegration;
 use App\Traits\PersonalInformation;
 use App\Http\Controllers\Controller;
+use App\Traits\OvertimeRatePolicy;
 use App\Traits\OverTimeRounding;
 use App\Traits\ShiftInformation;
 use App\Traits\ShiftRuleInfo;
@@ -19,7 +20,9 @@ use Illuminate\Support\Facades\Storage;
 
 class QuestionnaireController extends Controller
 {
-    use DeviceIntegration,PersonalInformation,ShiftInformation,ShiftRuleInfo,OverTimeRounding;
+    use DeviceIntegration,PersonalInformation,
+    ShiftInformation,ShiftRuleInfo,OverTimeRounding,
+    OvertimeRatePolicy;
 
     public function __construct()
     {
@@ -54,37 +57,43 @@ class QuestionnaireController extends Controller
     public function store(Request $request)
     {
         // return $request;
-        return $this->storeOTRoundingAns($request);
-        $validated  = $request->validate([
-            'pims_upload'   => 'required',
-            'device_log'    => 'required',
-            'shiftname.*'   => 'required',
-            'intime.*'      => 'required',
-            'outtime.*'     => 'required',
-            'whour.*'       => 'required',
-            'lgrace.*'      => 'required',
-            'eograce.*'     => 'required',
-            'lout.*'        => 'required',
-            'lin.*'         => 'required',
-            'not.*'         => 'required',
-            'eot.*'         => 'required',
-            'shift_roster'  => 'required',
-        ],
-        [
-            'pims_upload.required'      => 'Questions-01: Answer is required',
-            'device_log.required'       => 'Questions-02: Answer is required',
-            'shiftname.*.required'      => 'Questions-03: Shift name field is required',
-            'intime.*.required'         => 'Questions-03: In time field is required',
-            'outtime.*.required'        => 'Questions-03: Out time field is required',
-            'whour.*.required'          => 'Questions-03: Working hour field is required',
-            'lgrace.*.required'         => 'Questions-03: Late grace time field is required',
-            'eograce.*.required'        => 'Questions-03: Early out grace time field is required',
-            'lout.*.required'           => 'Questions-03: Lunch out time field is required',
-            'lin.*.required'            => 'Questions-03: Lunch in time field is required',
-            'not.*.required'            => 'Questions-03: Normal OT field is required',
-            'eot.*.required'            => 'Questions-03: Extra OT field is required',
-            'shift_roster.required'     => 'Questions-04: Answer is required'
-        ]);
+       return  $this->storeOTRateAns($request);
+
+    //     $validated  = $request->validate([
+    //         'pims_upload'   => 'required',
+    //         'device_log'    => 'required',
+    //         'shiftname.*'   => 'required',
+    //         'intime.*'      => 'required',
+    //         'outtime.*'     => 'required',
+    //         'whour.*'       => 'required',
+    //         'lgrace.*'      => 'required',
+    //         'eograce.*'     => 'required',
+    //         'lout.*'        => 'required',
+    //         'lin.*'         => 'required',
+    //         'not.*'         => 'required',
+    //         'eot.*'         => 'required',
+    //         'shift_roster'  => 'required',
+    //         'ot_round'      => 'required',
+    //         'ot_rate'       => 'required'
+    //     ],
+    //     [
+    //         'pims_upload.required'      => 'Questions-01: Answer is required',
+    //         'device_log.required'       => 'Questions-02: Answer is required',
+    //         'shiftname.*.required'      => 'Questions-03: Shift name field is required',
+    //         'intime.*.required'         => 'Questions-03: In time field is required',
+    //         'outtime.*.required'        => 'Questions-03: Out time field is required',
+    //         'whour.*.required'          => 'Questions-03: Working hour field is required',
+    //         'lgrace.*.required'         => 'Questions-03: Late grace time field is required',
+    //         'eograce.*.required'        => 'Questions-03: Early out grace time field is required',
+    //         'lout.*.required'           => 'Questions-03: Lunch out time field is required',
+    //         'lin.*.required'            => 'Questions-03: Lunch in time field is required',
+    //         'not.*.required'            => 'Questions-03: Normal OT field is required',
+    //         'eot.*.required'            => 'Questions-03: Extra OT field is required',
+    //         'shift_roster.required'     => 'Questions-04: Answer is required',
+    //         'ot_round.required'         => 'Questions-05: Answer is required',
+    //         'ot_rate.required'          => 'Questions-06: Answer is required',
+    //     ]
+    // );
 
         $fileName=null;
         $filePath = 'storage/app/public/'.Str::slug($request->companyName);
@@ -93,6 +102,8 @@ class QuestionnaireController extends Controller
         $this->storeDeviceAns($request);
         $this->storeShiftPlanAns($request);
         $this->storeShiftRuleAns($request);
+        $this->storeOTRoundingAns($request);
+        $this->storeOTRateAns($request);
 
     }
 
