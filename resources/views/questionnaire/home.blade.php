@@ -526,6 +526,8 @@
                                     <div class="form-group clearfix mb-0">
                                         <label for="questions08">08. Do you maintain multiple Leave types &
                                             allocation?</label>
+                                            <a href="javascript:void(0)" class="cursor-pointer btn-modal float-right show-minutemodal"
+                                        data-toggle="modal" data-target="#leaveallocationmodel">For example, Click here</a>
                                         <div class="icheck-primary d-inline ml-3 mr-2">
                                             <input class="btn3 btn-yes" type="radio" id="radioPrimary15" name="lv_allocation"
                                                 value="yes">
@@ -541,9 +543,11 @@
                                                 <label for="lv_type" class="col-sm-2">Select Leave Type :</label>
                                                 <select name="lv_type" id="lv_type" class="custom-select custom-select-sm col-sm-3 mr-4">
                                                     <option value="0" selected disabled>Select Leave Type</option>
-                                                    <option value="cl">CL</option>
-                                                    <option value="sl">SL</option>
-                                                    <option value="el">EL</option>
+                                                    <option value="cl">Casual Leave</option>
+                                                    <option value="sl">Sick Leave</option>
+                                                    <option value="el">Earn Leave</option>
+                                                    <option value="lwp">Leave Without Pay</option>
+                                                    <option value="spl">Special Leave</option>
                                                 </select>
                                                 <button class="btn btn-sm btn-info add-lv-policy col-sm-1">Add <i
                                                     class="fas fa-plus"></i></button>
@@ -563,97 +567,16 @@
                                                         <th class="py-1">Action</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody class="lv-policy-body">
-                                                    {{-- <tr>
-                                                        <td class="py-0 px-0" width="10%">
-                                                            <input type="text" class="w-100 border-0" name="lv_type[]"
-                                                                style="height: 24px;">
-                                                        </td>
-                                                        <td class="py-0 px-0" width="10%">
-                                                            <input type="text" class="w-100 border-0" name="lv_days[]"
-                                                                style="height: 24px;">
-                                                        </td>
-                                                        <td class="py-0 px-0" width="15%">
-                                                            <div class="custom-control custom-radio d-inline mr-2">
-                                                                <input class="custom-control-input" type="radio"
-                                                                    id="rcredit1" name="lv_credit" value="boy">
-                                                                <label title="Beginning of the Year" for="rcredit1"
-                                                                    class="custom-control-label"
-                                                                    style="font-size: 14px; cursor: pointer;">BOY
-                                                                </label>
-                                                            </div>
-                                                            <div class="custom-control custom-radio d-inline">
-                                                                <input type="radio" class="custom-control-input"
-                                                                    name="lv_credit" id="rcredit2" value="eoy">
-                                                                <label title="End of the Year" for="rcredit2"
-                                                                    class="custom-control-label"
-                                                                    style="font-size: 14px; cursor: pointer;">EOY
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td class="py-0 px-0" width="22%">
-                                                            <div class="custom-control custom-radio d-inline mr-2">
-                                                                <input type="radio" class="custom-control-input"
-                                                                    name="lv_calbasis" id="rbasis1" value="doj">
-                                                                <label title="Date of Joining" for="rbasis1"
-                                                                    class="custom-control-label"
-                                                                    style="font-size: 14px; cursor: pointer;">DOJ</label>
-                                                            </div>
-                                                            <div class="custom-control custom-radio d-inline">
-                                                                <input type="radio" class="custom-control-input"
-                                                                    name="lv_calbasis" id="rbasis2" value="doj">
-                                                                <label title="Date of confirmation" for="rbasis2"
-                                                                    class="custom-control-label"
-                                                                    style="font-size: 14px; cursor: pointer;">DOC</label>
-                                                            </div>
-                                                            <div class="d-inline ml-2">
-                                                                <input type="text" class="w-25 border-1"
-                                                                    name="lv_daysafter[]" placeholder="Days after"
-                                                                    style="height: 24px;">
-                                                            </div>
-                                                        </td>
-                                                        <td class="py-0 px-0" width="15%">
-                                                            <div class="custom-control custom-radio d-inline mr-2">
-                                                                <input type="radio" class="custom-control-input"
-                                                                    name="lv_caltype" id="rcaltype1" value="cc">
-                                                                <label title="Sandwitch on Work Off / Holiday" for="rcaltype1"
-                                                                    class="custom-control-label"
-                                                                    style="font-size: 14px; cursor: pointer;">CC</label>
-                                                            </div>
-                                                            <div class="custom-control custom-radio d-inline">
-                                                                <input type="radio" class="custom-control-input"
-                                                                    name="lv_caltype" id="rcaltype2" value="ec">
-                                                                <label title="Non-Sandwitch on Work Off / Holiday" for="rcaltype2"
-                                                                    class="custom-control-label"
-                                                                    style="font-size: 14px; cursor: pointer;">EC</label>
-                                                            </div>
-                                                        </td>
-                                                        <td class="py-0 px-0" width="13%">
-                                                            <div class="custom-control custom-checkbox d-inline">
-                                                                <input class="custom-control-input" type="checkbox"
-                                                                    id="prodata" name="lv_prodata[]" value="prodata">
-                                                                <label for="prodata" class="custom-control-label"
-                                                                    title="First year proportionate"></label>
-                                                            </div>
-                                                        </td>
-                                                        <td class="py-0 px-0" width="10%">
-                                                            <input type="text" class="w-100 border-0"
-                                                                name="lv_limit[]" style="height: 24px;">
-                                                        </td>
-                                                        <td class="py-0 px-0" width="15%">
-                                                            <input type="text" class="w-100 border-0" name="lv_cfw[]"
-                                                                style="height: 24px;">
-                                                        </td>
-                                                        <td class="py-0 px-0" style="width: 5%;">
-                                                            <i class="far fa-trash-alt text-danger delete"></i>
-                                                        </td>
-                                                    </tr> --}}
-                                                </tbody>
+                                                <tbody class="lv-policy-body"></tbody>
                                             </table>
-                                            {{-- <div style="margin-top: -10px;">
-                                                <button class="btn btn-sm btn-info add-lv-policy">Add <i
-                                                        class="fas fa-plus"></i></button>
-                                            </div> --}}
+                                            <span style="font-size: 9px;" class="bg-warning p-1"><strong>Legend :</strong>
+                                                BOY = Leave credit start from begin of the year,
+                                                EOY = Leave credit start after end of the year,
+                                                DOJ = Leave allocation start from date of joining,
+                                                DOC = Leave allocation start from date of confirmation,
+                                                CC  = Company Calendar (LV-LV-LV),
+                                                EC  = Employee Calendar (LV-W-LV)
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -1489,6 +1412,7 @@
 @include('modal.MinuteWiseOTRound')
 @include('modal.CategoryWiseOTRound')
 @include('modal.OTRateModal')
+@include('modal.leaveAllocation')
 
 {{-- Scroll to Top Button --}}
 <div class="float-right">

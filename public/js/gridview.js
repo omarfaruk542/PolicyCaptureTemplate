@@ -136,41 +136,39 @@ $(document).ready(function () {
     $('.add-lv-policy').click(function (e) {
         e.preventDefault();
         count = count + 2;
-        // var leavetype = $('#lv_type').val();
         var leavevalue = $('#lv_type').find(":selected").val();
         var leavename = $('#lv_type').find(":selected").text();
-        leavetype.push(leavevalue);
 
         var html = `<tr>
-                    <td class="py-0 px-0" width="10%">
+                    <td class="py-0 px-0" width="15%">
                         <input type="text" class="w-100 border-0" name="lv_name[]" value="`+leavename+`" disabled
                         style="height: 24px; padding: 0 5px;">
                     </td>
                     <td class="py-0 px-0" width="10%">
                         <input type="text" class="w-100 border-0" name="lv_days[]"
-                        style="height: 24px;">
+                        style="height: 24px; padding: 0 5px;">
                     </td>
                     <td class="py-0 px-0" width="15%">
                         <div class="custom-control custom-radio d-inline mr-2">
-                            <input class="custom-control-input" type="radio" id="rcredit`+(count)+`" name="lv_credit`+count+`" value="boy">
+                            <input class="custom-control-input" type="radio" id="rcredit`+(count)+`" name="lv_credit_`+leavevalue+`" value="boy">
                             <label title="Beginning of the Year" for="rcredit`+(count)+`" class="custom-control-label"
                             style="font-size: 14px; cursor: pointer;">BOY </label>
                         </div>
                         <div class="custom-control custom-radio d-inline">
-                            <input type="radio" class="custom-control-input" name="lv_credit`+(count)+`" id="rcredit`+(count+1)+`" value="eoy">
+                            <input type="radio" class="custom-control-input" name="lv_credit_`+(leavevalue)+`" id="rcredit`+(count+1)+`" value="eoy">
                             <label title="End of the Year" for="rcredit`+(count+1)+`" class="custom-control-label"
                             style="font-size: 14px; cursor: pointer;">EOY </label>
                         </div>
                     </td>
                     <td class="py-0 px-0" width="22%">
                         <div class="custom-control custom-radio d-inline mr-2">
-                            <input type="radio" class="custom-control-input" name="calbasis`+count+`" id="rbasis`+count+`" value="doj">
+                            <input type="radio" class="custom-control-input" name="calbasis_`+leavevalue+`" id="rbasis`+count+`" value="doj">
                             <label title="Date of Joining" for="rbasis`+count+`"
                             class="custom-control-label"
                             style="font-size: 14px; cursor: pointer;">DOJ</label>
                         </div>
                         <div class="custom-control custom-radio d-inline">
-                            <input type="radio" class="custom-control-input" name="calbasis`+count+`" id="rbasis`+(count+1)+`" value="doj">
+                            <input type="radio" class="custom-control-input" name="calbasis_`+leavevalue+`" id="rbasis`+(count+1)+`" value="doj">
                             <label title="Date of confirmation" for="rbasis`+(count+1)+`"
                             class="custom-control-label"
                             style="font-size: 14px; cursor: pointer;">DOC</label>
@@ -182,13 +180,13 @@ $(document).ready(function () {
                     </td>
                     <td class="py-0 px-0" width="15%">
                         <div class="custom-control custom-radio d-inline mr-2">
-                            <input type="radio" class="custom-control-input" name="caltype`+count+`" id="rcaltype`+count+`" value="cc">
+                            <input type="radio" class="custom-control-input" name="caltype_`+leavevalue+`" id="rcaltype`+count+`" value="cc">
                             <label title="Company Calendar" for="rcaltype`+count+`"
                             class="custom-control-label"
                             style="font-size: 14px; cursor: pointer;">CC</label>
                         </div>
                         <div class="custom-control custom-radio d-inline">
-                            <input type="radio" class="custom-control-input" name="caltype`+count+`" id="rcaltype`+(count+1)+`" value="ec">
+                            <input type="radio" class="custom-control-input" name="caltype_`+leavevalue+`" id="rcaltype`+(count+1)+`" value="ec">
                             <label title="Employee Calendar" for="rcaltype`+(count+1)+`"
                             class="custom-control-label"
                             style="font-size: 14px; cursor: pointer;">EC</label>
@@ -196,7 +194,7 @@ $(document).ready(function () {
                     </td>
                     <td class="py-0 px-0" width="13%">
                         <div class="custom-control custom-checkbox d-inline">
-                            <input class="custom-control-input" type="checkbox" id="prodata`+count+`" name="prodata" value="prodata">
+                            <input class="custom-control-input" type="checkbox" id="prodata`+count+`" name="prodata_`+leavevalue+`" value="prodata">
                             <label for="prodata`+count+`" class="custom-control-label"
                             title="First year proportionate"></label>
                         </div>
@@ -214,12 +212,16 @@ $(document).ready(function () {
                     </td>
                 </tr>`;
 
-            if(leavetype == null || leavetype == ""){
+            if(leavevalue == null || leavevalue == "" || leavevalue == 0){
                 alert('Please select leave type');
             } else {
-                $('.lv-policy-body').append(html);
+                if(leavetype.includes(leavevalue)){
+                    alert('Leave exists')
+                } else {
+                    leavetype.push(leavevalue);
+                    $('.lv-policy-body').append(html);
+                }
             }
-
     })
     $('.add-en-policy').click(function (e) {
         e.preventDefault();
@@ -545,5 +547,6 @@ $(document).ready(function () {
 
     $(document).on('click', '.delete', function () {
         $(this).parents('tr').remove();
+        // leavetype.pop(leavevalue);
     })
 });
