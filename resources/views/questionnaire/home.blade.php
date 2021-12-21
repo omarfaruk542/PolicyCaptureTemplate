@@ -569,7 +569,7 @@
                                                 </thead>
                                                 <tbody class="lv-policy-body"></tbody>
                                             </table>
-                                            <span style="font-size: 9px;" class="bg-warning p-1"><strong>Legend :</strong>
+                                            <span style="font-size: 9px;" class="bg-success p-1"><strong>Legend :</strong>
                                                 BOY = Leave credit start from begin of the year,
                                                 EOY = Leave credit start after end of the year,
                                                 DOJ = Leave allocation start from date of joining,

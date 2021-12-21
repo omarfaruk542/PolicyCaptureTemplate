@@ -141,8 +141,9 @@ $(document).ready(function () {
 
         var html = `<tr>
                     <td class="py-0 px-0" width="15%">
-                        <input type="text" class="w-100 border-0" name="lv_name[]" value="`+leavename+`" disabled
+                        <input type="text" class="w-100 border-0" name="lv_name[]" value="`+leavename+`"
                         style="height: 24px; padding: 0 5px;">
+                        <input type="hidden" class="w-100 border-0" name="lv_short_name[]" value="`+leavevalue+`">
                     </td>
                     <td class="py-0 px-0" width="10%">
                         <input type="text" class="w-100 border-0" name="lv_days[]"
@@ -194,7 +195,7 @@ $(document).ready(function () {
                     </td>
                     <td class="py-0 px-0" width="13%">
                         <div class="custom-control custom-checkbox d-inline">
-                            <input class="custom-control-input" type="checkbox" id="prodata`+count+`" name="prodata_`+leavevalue+`" value="prodata">
+                            <input class="custom-control-input" type="checkbox" id="prodata`+count+`" name="prodata_`+leavevalue+`" value="true">
                             <label for="prodata`+count+`" class="custom-control-label"
                             title="First year proportionate"></label>
                         </div>

@@ -11,6 +11,7 @@ use App\Traits\DeviceIntegration;
 use App\Traits\PersonalInformation;
 use App\Http\Controllers\Controller;
 use App\Traits\LeaveCalendar;
+use App\Traits\LeavePolicy;
 use App\Traits\OvertimeRatePolicy;
 use App\Traits\OverTimeRounding;
 use App\Traits\ShiftInformation;
@@ -23,7 +24,7 @@ class QuestionnaireController extends Controller
 {
     use DeviceIntegration,PersonalInformation,
     ShiftInformation,ShiftRuleInfo,OverTimeRounding,
-    OvertimeRatePolicy,LeaveCalendar;
+    OvertimeRatePolicy,LeaveCalendar,LeavePolicy;
 
     public function __construct()
     {
@@ -57,7 +58,10 @@ class QuestionnaireController extends Controller
      */
     public function store(Request $request)
     {
-        return $request;
+
+        // return $request;
+        return $this->storeLVPolicyAns($request);
+
         $validated  = $request->validate([
             'pims_upload'   => 'required',
             'device_log'    => 'required',
