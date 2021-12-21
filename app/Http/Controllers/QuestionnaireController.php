@@ -59,9 +59,7 @@ class QuestionnaireController extends Controller
     public function store(Request $request)
     {
 
-        // return $request;
-        return $this->storeLVPolicyAns($request);
-
+        return $request;
         $validated  = $request->validate([
             'pims_upload'   => 'required',
             'device_log'    => 'required',
@@ -80,7 +78,8 @@ class QuestionnaireController extends Controller
             'ot_rate'       => 'required',
             'lv_cal_rule.*' => 'required',
             'lv_from.*'     => 'required',
-            'lv_to.*'       => 'required'
+            'lv_to.*'       => 'required',
+            'lv_allocation' => 'required'
         ],
         [
             'pims_upload.required'          => 'Questions-01: Answer is required',
@@ -98,9 +97,10 @@ class QuestionnaireController extends Controller
             'shift_roster.required'         => 'Questions-04: Answer is required',
             'ot_round.required'             => 'Questions-05: Answer is required',
             'ot_rate.required'              => 'Questions-06: Answer is required',
-            'lv_cal_rule.*.required'          => 'Questions-07: Leave calendar rule is required',
-            'lv_from.*.required'              => 'Questions-07: From date is required',
-            'lv_to.*.required'                => 'Questions-07: Todate is required',
+            'lv_cal_rule.*.required'        => 'Questions-07: Leave calendar rule is required',
+            'lv_from.*.required'            => 'Questions-07: From date is required',
+            'lv_to.*.required'              => 'Questions-07: Todate is required',
+            'lv_allocation.required'        => 'Questions-08: Answer is required',
             ]
     );
 
@@ -116,6 +116,7 @@ class QuestionnaireController extends Controller
         $this->storeOTRoundingAns($request);
         $this->storeOTRateAns($request);
         $this->storeLVCalendarAns($request);
+        $this->storeLVPolicyAns($request);
 
 
     }
