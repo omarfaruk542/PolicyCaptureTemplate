@@ -231,21 +231,20 @@ $(document).ready(function () {
                         <td class="py-0 px-0" width="20%">
                         <select name="encash_rule[]" id="lv_type" class="custom-select custom-select-sm border-0"
                         style="height: 25px;">
-                            <option value="0" selected disabled>Select Leave Type</option>
+                            <option value="0" disabled>Select Leave Type</option>
                             <option value="cl">Casual Leave</option>
                             <option value="sl">Sick Leave</option>
-                            <option value="el">Earn Leave</option>
+                            <option value="el" selected>Earn Leave</option>
                             <option value="lwp">Leave Without Pay</option>
                             <option value="spl">Special Leave</option>
                         </select>
-                    </td>
                     <td class="py-0 px-0" width="20%">
                         <div class="d-flex">
                             <input type="number" class="w-100 border-0"
                                 name="encash_days[]" style="height: 24px; padding: 0 5px;" placeholder="Encash days">
                             <select class="custom-select custom-select-sm border-0" name="is_fixed[]"
                                 style="height: 25px; width: 100px;">
-                                <option selected disabled>select Item</option>
+                                <option selected disabled>select Criteria</option>
                                 <option value="fixed">Fixed</option>
                                 <option value="%">%</option>
                             </select>
@@ -253,6 +252,10 @@ $(document).ready(function () {
                     </td>
                     <td class="py-0 px-0" width="25%">
                         <input type="text" class="w-100 border-0" name="encash_formula[]"
+                            style="height: 24px;">
+                    </td>
+                    <td class="py-0 px-0" width="10%">
+                        <input type="date" class="w-100 border-0" name="pdd[]"
                             style="height: 24px;">
                     </td>
                     <td class="py-0 px-0" width="30%">

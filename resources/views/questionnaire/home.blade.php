@@ -584,7 +584,7 @@
                             {{-- Question : 08 End --}}
                             {{-- Question : 09 --}}
                             <div class="card" style="box-shadow: none; border: 1px solid rgba(0, 0, 0, 0.15);">
-                                <div class="card-header py-1" data-card-widget="collapse">
+                                <div class="card-header py-1 @error('lv_encash') text-white bg-danger @enderror" data-card-widget="collapse">
                                     <h3 class="card-title">Leave Encashment</h3>
                                     <div class="card-tools">
                                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -610,9 +610,10 @@
                                                 style="font-size: 14px;">
                                                 <thead>
                                                     <tr>
-                                                        <th class="py-1">Leave Type</th>
+                                                        <th class="py-1">Leave Name</th>
                                                         <th class="py-1">Allowable Encashment Days</th>
-                                                        <th class="py-1">Formula</th>
+                                                        <th class="py-1">Calculation</th>
+                                                        <th class="py-1">Disburse Date</th>
                                                         <th class="py-1">Remarks</th>
                                                         <th class="py-1">Action</th>
 
@@ -621,25 +622,22 @@
                                                 <tbody class="encash-policy-body">
                                                     <tr>
                                                         <td class="py-0 px-0" width="20%">
-                                                            <select name="encash_rule[]" id="lv_type" class="custom-select custom-select-sm border-0"
+                                                            <select name="encash_lv_name[]" id="en_lv_type" class="custom-select custom-select-sm border-0"
                                                             style="height: 25px;">
-                                                                <option value="0" selected disabled>Select Leave Type</option>
+                                                                <option value="0" disabled>Select Leave Type</option>
                                                                 <option value="cl">Casual Leave</option>
                                                                 <option value="sl">Sick Leave</option>
-                                                                <option value="el">Earn Leave</option>
+                                                                <option value="el" selected>Earn Leave</option>
                                                                 <option value="lwp">Leave Without Pay</option>
                                                                 <option value="spl">Special Leave</option>
                                                             </select>
-                                                            {{-- <input type="text" class="w-100 border-0"
-                                                                name="encash_rule[]" style="height: 24px;"> --}}
-                                                        </td>
                                                         <td class="py-0 px-0" width="20%">
                                                             <div class="d-flex">
                                                                 <input type="number" class="w-100 border-0"
                                                                     name="encash_days[]" style="height: 24px; padding: 0 5px;" placeholder="Encash days">
-                                                                <select class="custom-select custom-select-sm border-0" name="is_fixed[]"
+                                                                <select class="custom-select custom-select-sm border-0" name="en_criteria[]"
                                                                     style="height: 25px; width: 100px;">
-                                                                    <option selected disabled>select Item</option>
+                                                                    <option selected disabled>select Criteria</option>
                                                                     <option value="fixed">Fixed</option>
                                                                     <option value="%">%</option>
                                                                 </select>
@@ -647,6 +645,10 @@
                                                         </td>
                                                         <td class="py-0 px-0" width="25%">
                                                             <input type="text" class="w-100 border-0" name="encash_formula[]"
+                                                                style="height: 24px;">
+                                                        </td>
+                                                        <td class="py-0 px-0" width="10%">
+                                                            <input type="date" class="w-100 border-0" name="pdd[]"
                                                                 style="height: 24px;">
                                                         </td>
                                                         <td class="py-0 px-0" width="30%">
@@ -682,12 +684,12 @@
                                     <div class="form-group clearfix mb-0">
                                         <label for="questions10">10. Do you have maternity leave policy?</label>
                                         <div class="icheck-primary d-inline ml-3 mr-2">
-                                            <input class="btn3 btn-yes" type="radio" id="radioPrimary19" name="r10"
+                                            <input class="btn3 btn-yes" type="radio" id="radioPrimary19" name="mlv"
                                                 value="yes">
                                             <label for="radioPrimary19">Yes</label>
                                         </div>
                                         <div class="icheck-primary d-inline">
-                                            <input class="btn4 btn-no" type="radio" id="radioPrimary20" name="r10"
+                                            <input class="btn4 btn-no" type="radio" id="radioPrimary20" name="mlv"
                                                 value="no">
                                             <label for="radioPrimary20">No</label>
                                         </div>
@@ -696,28 +698,29 @@
                                                 style="font-size: 14px;">
                                                 <thead>
                                                     <tr>
-                                                        <th class="py-1">Rule Name</th>
-                                                        <th class="py-1">Allocation Days</th>
-                                                        <th class="py-1">Before EDD</th>
-                                                        <th class="py-1">After EDD</th>
-                                                        <th class="py-1">Depends on</th>
-                                                        <th class="py-1">Calendar Type</th>
-                                                        <th class="py-1">First Payment</th>
-                                                        <th class="py-1">Last Payment</th>
-                                                        <th class="py-1">Action</th>
+                                                        <th class="py-1 align-middle">Rule Name</th>
+                                                        <th class="py-1 align-middle">Allocation Days</th>
+                                                        <th class="py-1 align-middle">Before EDD</th>
+                                                        <th class="py-1 align-middle">After EDD</th>
+                                                        <th class="py-1 align-middle">Depends on</th>
+                                                        <th class="py-1 align-middle">Calendar Type</th>
+                                                        <th class="py-1 align-middle">First Payment</th>
+                                                        <th class="py-1 align-middle">Last Payment</th>
+                                                        <th class="py-1 align-middle">Allowable Benefits</th>
+                                                        <th class="py-1 align-middle">Action</th>
 
                                                     </tr>
                                                 </thead>
                                                 <tbody class="mlv-policy-body">
                                                     <tr>
-                                                        <td class="py-0 px-0" width="10%">
-                                                            <input type="text" class="w-100 border-0"
-                                                                name="mlvrule[]" style="height: 24px;">
-                                                        </td>
                                                         <td class="py-0 px-0" width="15%">
+                                                            <input type="text" class="w-100 border-0"
+                                                                name="mlv_rule[]" style="height: 24px;">
+                                                        </td>
+                                                        <td class="py-0 px-0" width="10%">
                                                             <div class="d-flex">
-                                                                <input type="text" class="w-100 border-1"
-                                                                    name="mlvdays[]" style="height: 24px;">
+                                                                <input type="text" class="w-100 border-0"
+                                                                    name="mlv_days[]" style="height: 24px;">
 
                                                             </div>
                                                         </td>
@@ -732,14 +735,14 @@
                                                         <td class="py-0 px-0" width="20%">
                                                             <div class="custom-control custom-radio d-inline mr-2">
                                                                 <input type="radio" class="custom-control-input"
-                                                                    name="dependson" id="depends1" value="doj">
+                                                                    name="dependson[]" id="depends1" value="doj">
                                                                 <label title="Date of Joining" for="depends1"
                                                                     class="custom-control-label"
                                                                     style="font-size: 14px; cursor: pointer;">DOJ</label>
                                                             </div>
                                                             <div class="custom-control custom-radio d-inline">
                                                                 <input type="radio" class="custom-control-input"
-                                                                    name="dependson" id="depends2" value="doj">
+                                                                    name="dependson[]" id="depends2" value="doj">
                                                                 <label title="Date of confirmation" for="depends2"
                                                                     class="custom-control-label"
                                                                     style="font-size: 14px; cursor: pointer;">DOC</label>
@@ -753,14 +756,14 @@
                                                         <td class="py-0 px-0" width="10%">
                                                             <div class="custom-control custom-radio d-inline mr-2">
                                                                 <input type="radio" class="custom-control-input"
-                                                                    name="mlvcaltype" id="mlvrcaltype1" value="cc">
+                                                                    name="mlvcaltype[]" id="mlvrcaltype1" value="cc">
                                                                 <label title="Company Calendar" for="mlvrcaltype1"
                                                                     class="custom-control-label"
                                                                     style="font-size: 14px; cursor: pointer;">CC</label>
                                                             </div>
                                                             <div class="custom-control custom-radio d-inline">
                                                                 <input type="radio" class="custom-control-input"
-                                                                    name="mlvcaltype" id="mlvrcaltype2" value="ec">
+                                                                    name="mlvcaltype[]" id="mlvrcaltype2" value="ec">
                                                                 <label title="Employee Calendar" for="mlvrcaltype2"
                                                                     class="custom-control-label"
                                                                     style="font-size: 14px; cursor: pointer;">EC</label>
@@ -774,16 +777,20 @@
                                                             <input type="text" class="w-100 border-0" name="lpay[]"
                                                                 style="height: 24px;">
                                                         </td>
+                                                        <td class="py-0 px-0" width="10%">
+                                                            <input type="number" class="w-100 border-0" name="benefits_no[]"
+                                                                style="height: 24px;">
+                                                        </td>
                                                         <td class="py-0 px-0" style="width: 5%;">
                                                             <i class="far fa-trash-alt text-danger delete"></i>
                                                         </td>
                                                     </tr>
                                                 </tbody>
                                             </table>
-                                            <div style="margin-top: -10px;">
+                                            {{-- <div style="margin-top: -10px;">
                                                 <button class="btn btn-sm btn-info add-mlv-policy">Add <i
                                                         class="fas fa-plus"></i></button>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                     </div>
                                 </div>

@@ -11,7 +11,9 @@ use App\Traits\DeviceIntegration;
 use App\Traits\PersonalInformation;
 use App\Http\Controllers\Controller;
 use App\Traits\LeaveCalendar;
+use App\Traits\LeaveEncashment;
 use App\Traits\LeavePolicy;
+use App\Traits\MaternityLeavePolicy;
 use App\Traits\OvertimeRatePolicy;
 use App\Traits\OverTimeRounding;
 use App\Traits\ShiftInformation;
@@ -24,7 +26,8 @@ class QuestionnaireController extends Controller
 {
     use DeviceIntegration,PersonalInformation,
     ShiftInformation,ShiftRuleInfo,OverTimeRounding,
-    OvertimeRatePolicy,LeaveCalendar,LeavePolicy;
+    OvertimeRatePolicy,LeaveCalendar,LeavePolicy,LeaveEncashment,
+    MaternityLeavePolicy;
 
     public function __construct()
     {
@@ -59,7 +62,9 @@ class QuestionnaireController extends Controller
     public function store(Request $request)
     {
 
-        return $request;
+        // return $request;
+        return $this->storeMLVPolicyAns($request);
+
         $validated  = $request->validate([
             'pims_upload'   => 'required',
             'device_log'    => 'required',
@@ -79,7 +84,8 @@ class QuestionnaireController extends Controller
             'lv_cal_rule.*' => 'required',
             'lv_from.*'     => 'required',
             'lv_to.*'       => 'required',
-            'lv_allocation' => 'required'
+            'lv_allocation' => 'required',
+            'lv_encash'     => 'required'
         ],
         [
             'pims_upload.required'          => 'Questions-01: Answer is required',
@@ -101,6 +107,7 @@ class QuestionnaireController extends Controller
             'lv_from.*.required'            => 'Questions-07: From date is required',
             'lv_to.*.required'              => 'Questions-07: Todate is required',
             'lv_allocation.required'        => 'Questions-08: Answer is required',
+            'lv_encash.required'            => 'Questions-09: Answer is required',
             ]
     );
 
@@ -117,6 +124,7 @@ class QuestionnaireController extends Controller
         $this->storeOTRateAns($request);
         $this->storeLVCalendarAns($request);
         $this->storeLVPolicyAns($request);
+        $this->storeLVEncashmentAns($request);
 
 
     }

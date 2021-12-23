@@ -48,6 +48,7 @@
     width: 25px !important;
 }
 
-.lv-policy-body input::placeholder {
+.lv-policy-body input::placeholder,
+.mlv-policy-body input::placeholder {
     font-size: 9px !important;
 }
