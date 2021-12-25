@@ -16,6 +16,7 @@ use App\Traits\LeavePolicy;
 use App\Traits\MaternityLeavePolicy;
 use App\Traits\OvertimeRatePolicy;
 use App\Traits\OverTimeRounding;
+use App\Traits\SalaryHead;
 use App\Traits\SalaryProcessPeriod;
 use App\Traits\SalaryRule;
 use App\Traits\ShiftInformation;
@@ -29,7 +30,7 @@ class QuestionnaireController extends Controller
     use DeviceIntegration,PersonalInformation,
     ShiftInformation,ShiftRuleInfo,OverTimeRounding,
     OvertimeRatePolicy,LeaveCalendar,LeavePolicy,LeaveEncashment,
-    MaternityLeavePolicy,SalaryProcessPeriod,SalaryRule;
+    MaternityLeavePolicy,SalaryProcessPeriod,SalaryRule,SalaryHead;
 
     public function __construct()
     {
@@ -64,7 +65,7 @@ class QuestionnaireController extends Controller
     public function store(Request $request)
     {
 
-        return $request;
+        // return $request;
         $validated  = $request->validate([
             'pims_upload'   => 'required',
             'device_log'    => 'required',
@@ -93,6 +94,8 @@ class QuestionnaireController extends Controller
             'salary_calc.*' => 'required',
             'is_fixed.*'    => 'required',
             'rounding.*'    => 'required',
+            'e_head'        => 'required',
+            'd_head'        => 'required',
         ],
         [
             'pims_upload.required'          => 'Questions-01: Answer is required',
@@ -122,6 +125,8 @@ class QuestionnaireController extends Controller
             'salary_calc.*.required'        => 'Questions-12: Salary formula field is required',
             'is_fixed.*.required'           => 'Questions-12: Salary head fixed field is required',
             'rounding.*.required'           => 'Questions-12: Salary rounding field is required',
+            'e_head.required'               => 'Questions-13: Earnings head field is required',
+            'd_head.required'               => 'Questions-13: Deduction head field is required',
             ]
     );
 
@@ -142,6 +147,7 @@ class QuestionnaireController extends Controller
         $this->storeMLVPolicyAns($request);
         $this->storeSPPeriodAns($request);
         $this->storeSalaryRuleAns($request);
+        $this->storeSalaryHeadAns($request);
 
 
     }

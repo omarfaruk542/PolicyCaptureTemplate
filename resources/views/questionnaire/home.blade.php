@@ -934,7 +934,8 @@
                             {{-- Question : 12 End --}}
                             {{-- Question : 13 --}}
                             <div class="card" style="box-shadow: none; border: 1px solid rgba(0, 0, 0, 0.15);">
-                                <div class="card-header py-1" data-card-widget="collapse">
+                                <div class="card-header py-1 @error('e_head') text-white bg-danger @enderror
+                                @error('d_head') text-white bg-danger @enderror" data-card-widget="collapse">
                                     <h3 class="card-title">Salary Heads</h3>
                                     <div class="card-tools">
                                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -988,7 +989,7 @@
                                                         </td>
                                                         <td class="py-0 px-0" width="auto">
                                                             <input type="text" class="w-100 border-0"
-                                                            name="salary_remarks[]" style="height: 27px;"
+                                                            name="head_remarks" style="height: 27px;"
                                                             placeholder="Please enter here for more Salary Heads"
                                                             >
                                                         </td>
