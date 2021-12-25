@@ -672,7 +672,7 @@
                             {{-- Question : 09 End --}}
                             {{-- Question : 10 --}}
                             <div class="card" style="box-shadow: none; border: 1px solid rgba(0, 0, 0, 0.15);">
-                                <div class="card-header py-1" data-card-widget="collapse">
+                                <div class="card-header py-1 @error('mlv') text-white bg-danger @enderror" data-card-widget="collapse">
                                     <h3 class="card-title">Maternity Leave</h3>
                                     <div class="card-tools">
                                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -798,7 +798,7 @@
                             {{-- Question : 10 End --}}
                             {{-- Question : 11 --}}
                             <div class="card" style="box-shadow: none; border: 1px solid rgba(0, 0, 0, 0.15);">
-                                <div class="card-header py-1" data-card-widget="collapse">
+                                <div class="card-header py-1 @error('process_period') text-white bg-danger @enderror" data-card-widget="collapse">
                                     <h3 class="card-title">Salary Process Period</h3>
                                     <div class="card-tools">
                                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -811,12 +811,12 @@
                                         <label for="questions11">11. What is the Salary Cycle Period?</label>
 
                                         <div class="icheck-primary d-inline ml-2">
-                                            <input class="btn4 btn-no" type="radio" id="radioPrimary22" name="r11"
-                                                value="calendermonth">
+                                            <input class="btn4 btn-no" type="radio" id="radioPrimary22" name="process_period"
+                                                value="calendarmonth">
                                             <label for="radioPrimary22">Calendar Month</label>
                                         </div>
                                         <div class="icheck-primary d-inline ml-3 mr-2">
-                                            <input class="btn3 btn-yes" type="radio" id="radioPrimary21" name="r11"
+                                            <input class="btn3 btn-yes" type="radio" id="radioPrimary21" name="process_period"
                                                 value="crossmonth">
                                             <label for="radioPrimary21">Cross Month</label>
                                         </div>
@@ -834,10 +834,10 @@
                                                     <tr>
                                                         <td class="py-0 px-0">
                                                             <input type="date" class="w-100 border-0"
-                                                                name="fromdate" style="height: 25px;">
+                                                                name="salary_from_date" style="height: 25px;">
                                                         </td>
                                                         <td class="py-0 px-0">
-                                                            <input type="date" class="w-100 border-0" name="todate"
+                                                            <input type="date" class="w-100 border-0" name="salary_to_date"
                                                                 style="height: 25px;">
                                                         </td>
                                                     </tr>
@@ -850,7 +850,7 @@
                             {{-- Question : 11 End --}}
                             {{-- Question : 12 --}}
                             <div class="card" style="box-shadow: none; border: 1px solid rgba(0, 0, 0, 0.15);">
-                                <div class="card-header py-1" data-card-widget="collapse">
+                                <div class="card-header py-1 @error('salary_rule.*') text-white bg-danger @enderror" data-card-widget="collapse">
                                     <h3 class="card-title">Salary Structure</h3>
                                     <div class="card-tools">
                                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -879,12 +879,12 @@
                                                     <tr>
                                                         <td class="py-0 px-0" width="20%">
                                                             <input type="text" class="w-100 border-0"
-                                                                name="salaryrule[]" style="height: 24px;">
+                                                                name="salary_rule[]" style="height: 24px;">
                                                         </td>
                                                         <td class="py-0 px-0" width="25%">
                                                             <div class="d-flex">
-                                                                <select class="custom-select custom-select-sm"
-                                                                    style="height: 25px;">
+                                                                <select class="custom-select custom-select-sm border-0"
+                                                                    style="height: 25px;" name="salary_head[]">
                                                                     <option selected>Select Salary Head</option>
                                                                     <option value="1">GROSS</option>
                                                                     <option value="2" selected>BASIC</option>
@@ -897,14 +897,16 @@
                                                         </td>
                                                         <td class="py-0 px-0" width="30%">
                                                             <input type="text" class="w-100 border-0"
-                                                                name="salaryCalc[]" style="height: 24px;"
+                                                                name="salary_calc[]" style="height: 24px;"
                                                                 placeholder="(GROSS-(MEDICAL+CONVEYANCE+FOOD))/1.5"
                                                                 >
                                                         </td>
                                                         <td class="py-0 px-0" width="10%">
                                                             <div class="custom-control custom-checkbox d-inline">
                                                                 <input class="custom-control-input" type="checkbox"
-                                                                    id="salaryfixed" name="isfixed" value="isfixed">
+                                                                    id="salaryfixed" name="is_fixed[]" value="1">
+                                                                    <input class="custom-control-input" type="hidden"
+                                                                    id="salaryfixed" name="is_fixed[]" value="0">
                                                                 <label for="salaryfixed"
                                                                     class="custom-control-label"
                                                                     title="Is Fixed Salary"
@@ -956,10 +958,10 @@
                                                 <tbody class="salary-heads-body">
                                                     <tr>
                                                         <td class="py-0 px-0" width="38%">
-                                                            <select class="select2 custom-select custom-select-sm"
+                                                            <select class="select2 custom-select custom-select-sm border-0"
                                                                 multiple="multiple"
                                                                 data-placeholder="Select Earnings Heads"
-                                                                style="width: 100%; height: 25px;">
+                                                                style="width: 100%; height: 24px;" name="e_head[]">
                                                                 <option>GROSS</option>
                                                                 <option>BASIC</option>
                                                                 <option>HOUSE RENT</option>
@@ -975,7 +977,7 @@
                                                             <select class="select2 custom-select custom-select-sm"
                                                                 multiple="multiple"
                                                                 data-placeholder="Select Deduction Heads"
-                                                                style="width: 100%; height: 25px;">
+                                                                style="width: 100%; height: 24px;" name="d_head[]">
                                                                 <option>ABSENTEEISM</option>
                                                                 <option>INCOME TAX</option>
                                                                 <option>ADVANCE</option>
@@ -986,7 +988,7 @@
                                                         </td>
                                                         <td class="py-0 px-0" width="auto">
                                                             <input type="text" class="w-100 border-0"
-                                                            name="rmrks" style="height: 24px;"
+                                                            name="salary_remarks[]" style="height: 27px;"
                                                             placeholder="Please enter here for more Salary Heads"
                                                             >
                                                         </td>
@@ -1134,7 +1136,7 @@
                                 </div>
                                 <div class="card-body py-2">
                                     <div class="form-group clearfix mb-0">
-                                        <label for="questions16">16. Do you have any Additional Allowances?
+                                        <label for="questions16">15. Do you have any Additional Allowances?
                                         </label>
                                         <div class="icheck-primary d-inline ml-3 mr-2">
                                             <input class="btn1 btn-yes" type="radio" id="radioPrimary1" name="r1"
@@ -1238,7 +1240,7 @@
                                 </div>
                                 <div class="card-body py-2">
                                     <div class="form-group clearfix mb-0">
-                                        <label for="questions06">17. What is the Salary Deduction
+                                        <label for="questions06">16. What is the Salary Deduction
                                             Policy?</label>
                                         <div class="mt-2 showDetails">
                                             <table class="table table-bordered text-center"
@@ -1318,7 +1320,7 @@
                                 </div>
                                 <div class="card-body py-2">
                                     <div class="form-group clearfix mb-0">
-                                        <label for="questions06">18. Do you follow the Bangladesh Income Tax Ordinance?</label>
+                                        <label for="questions06">17. Do you follow the Bangladesh Income Tax Ordinance?</label>
                                         <div class="icheck-primary d-inline ml-3 mr-2">
                                             <input class="btn1 btn-yes" type="radio" id="tax_policy_yes" name="tax_policy"
                                                 value="yes">
@@ -1358,7 +1360,7 @@
                                 </div>
                                 <div class="card-body py-2">
                                     <div class="form-group clearfix mb-0">
-                                        <label for="questions06">19. What is the Festival Bonus calculation
+                                        <label for="questions06">18. What is the Festival Bonus calculation
                                             policy?</label>
                                         <div class="mt-2 showDetails">
                                             <table class="table table-bordered text-center"

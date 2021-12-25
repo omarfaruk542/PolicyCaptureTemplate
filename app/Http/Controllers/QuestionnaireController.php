@@ -16,6 +16,8 @@ use App\Traits\LeavePolicy;
 use App\Traits\MaternityLeavePolicy;
 use App\Traits\OvertimeRatePolicy;
 use App\Traits\OverTimeRounding;
+use App\Traits\SalaryProcessPeriod;
+use App\Traits\SalaryRule;
 use App\Traits\ShiftInformation;
 use App\Traits\ShiftRuleInfo;
 use Illuminate\Support\Arr;
@@ -27,7 +29,7 @@ class QuestionnaireController extends Controller
     use DeviceIntegration,PersonalInformation,
     ShiftInformation,ShiftRuleInfo,OverTimeRounding,
     OvertimeRatePolicy,LeaveCalendar,LeavePolicy,LeaveEncashment,
-    MaternityLeavePolicy;
+    MaternityLeavePolicy,SalaryProcessPeriod,SalaryRule;
 
     public function __construct()
     {
@@ -62,9 +64,7 @@ class QuestionnaireController extends Controller
     public function store(Request $request)
     {
 
-        // return $request;
-        return $this->storeMLVPolicyAns($request);
-
+        return $request;
         $validated  = $request->validate([
             'pims_upload'   => 'required',
             'device_log'    => 'required',
@@ -85,7 +85,14 @@ class QuestionnaireController extends Controller
             'lv_from.*'     => 'required',
             'lv_to.*'       => 'required',
             'lv_allocation' => 'required',
-            'lv_encash'     => 'required'
+            'lv_encash'     => 'required',
+            'mlv'           => 'required',
+            'process_period'=> 'required',
+            'salary_rule.*' => 'required',
+            'salary_head.*' => 'required',
+            'salary_calc.*' => 'required',
+            'is_fixed.*'    => 'required',
+            'rounding.*'    => 'required',
         ],
         [
             'pims_upload.required'          => 'Questions-01: Answer is required',
@@ -108,6 +115,13 @@ class QuestionnaireController extends Controller
             'lv_to.*.required'              => 'Questions-07: Todate is required',
             'lv_allocation.required'        => 'Questions-08: Answer is required',
             'lv_encash.required'            => 'Questions-09: Answer is required',
+            'mlv.required'                  => 'Questions-10: Answer is required',
+            'process_period.required'       => 'Questions-11: Answer is required',
+            'salary_rule.*.required'        => 'Questions-12: Salary rule name field is required',
+            'salary_head.*.required'        => 'Questions-12: Salary head field is required',
+            'salary_calc.*.required'        => 'Questions-12: Salary formula field is required',
+            'is_fixed.*.required'           => 'Questions-12: Salary head fixed field is required',
+            'rounding.*.required'           => 'Questions-12: Salary rounding field is required',
             ]
     );
 
@@ -125,6 +139,9 @@ class QuestionnaireController extends Controller
         $this->storeLVCalendarAns($request);
         $this->storeLVPolicyAns($request);
         $this->storeLVEncashmentAns($request);
+        $this->storeMLVPolicyAns($request);
+        $this->storeSPPeriodAns($request);
+        $this->storeSalaryRuleAns($request);
 
 
     }

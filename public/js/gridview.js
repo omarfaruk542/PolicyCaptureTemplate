@@ -347,16 +347,17 @@ $(document).ready(function () {
         e.preventDefault();
            count = count + 2;
         var html = `<tr>
-                    <td class="py-0 px-0" width="20%">
-                        <input type="text" class="w-100 border-0" name="salaryrule[]"
-                        style="height: 24px;">
+                        <td class="py-0 px-0" width="20%">
+                        <input type="text" class="w-100 border-0"
+                            name="salary_rule[]" style="height: 24px;">
                     </td>
                     <td class="py-0 px-0" width="25%">
                         <div class="d-flex">
-                            <select class="custom-select custom-select-sm" style="height: 25px;">
+                            <select class="custom-select custom-select-sm border-0"
+                                style="height: 25px;" name="salary_head[]">
                                 <option selected>Select Salary Head</option>
                                 <option value="1">GROSS</option>
-                                <option value="2">BASIC</option>
+                                <option value="2" selected>BASIC</option>
                                 <option value="3">HOUSE RENT</option>
                                 <option value="4">MEDICAL</option>
                                 <option value="5">FOOD ALLOWANCE</option>
@@ -365,19 +366,26 @@ $(document).ready(function () {
                         </div>
                     </td>
                     <td class="py-0 px-0" width="30%">
-                        <input type="text" class="w-100 border-0" name="salaryCalc[]"
-                        style="height: 24px;">
+                        <input type="text" class="w-100 border-0"
+                            name="salary_calc[]" style="height: 24px;"
+                            placeholder="(GROSS-(MEDICAL+CONVEYANCE+FOOD))/1.5"
+                            >
                     </td>
-                        <td class="py-0 px-0" width="10%">
+                    <td class="py-0 px-0" width="10%">
                         <div class="custom-control custom-checkbox d-inline">
-                            <input class="custom-control-input" type="checkbox" id="salaryfixed`+count+`" name="isfixed" value="isfixed">
-                            <label for="salaryfixed`+count+`" class="custom-control-label"
-                            title="Is Fixed Salary" style="cursor: pointer;"></label>
+                            <input class="custom-control-input" type="checkbox"
+                                id="salaryfixed" name="isfixed" value="is_fixed[]">
+                                <input class="custom-control-input" type="hidden"
+                                id="salaryfixed" name="is_fixed[]" value="0">
+                            <label for="salaryfixed"
+                                class="custom-control-label"
+                                title="Is Fixed Salary"
+                                style="cursor: pointer;"></label>
                         </div>
                     </td>
                     <td class="py-0 px-0" width="10%">
-                        <input type="number" class="w-100 border-0" name="rounding[]"
-                        style="height: 24px;">
+                        <input type="number" class="w-100 border-0"
+                            name="rounding[]" style="height: 24px;">
                     </td>
                     <td class="py-0 px-0" style="width: 5%;">
                         <i class="far fa-trash-alt text-danger delete"></i>

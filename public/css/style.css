@@ -52,3 +52,20 @@
 .mlv-policy-body input::placeholder {
     font-size: 9px !important;
 }
+
+.encash-policy-body input::placeholder,
+.salary-rule-body input::placeholder,
+.salary-heads-body input::placeholder {
+    font-size: 10px !important;
+    padding-left: 5px;
+}
+.salary-rule-body input {
+    font-size: 12px !important;
+}
+
+.salary-heads-body .select2-selection--multiple,
+.salary-heads-body .custom-select-sm,
+.salary-heads-body .select2-selection {
+    font-size: 12px !important;
+    min-height: 0;
+}
