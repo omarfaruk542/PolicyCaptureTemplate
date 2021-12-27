@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateQuestionnairesTable extends Migration
+class CreateAttendancePaymentRulesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,14 @@ class CreateQuestionnairesTable extends Migration
      */
     public function up()
     {
-        Schema::create('questionnaires', function (Blueprint $table) {
+        Schema::create('attendance_payment_rules', function (Blueprint $table) {
             $table->id();
             $table->foreignId('com_id')->references('id')->on('company_infos');
+            $table->string('rule_name')->nullable();
+            $table->string('policy')->nullable();
+            $table->integer('amount')->nullable();
+            $table->integer('is_fixed')->nullable();
+            $table->text('remarks')->nullable();
             $table->foreignId('added_by')->nullable()->references('id')->on('users');
             $table->foreignId('updated_by')->nullable()->references('id')->on('users');
             $table->timestamps();
@@ -29,6 +34,6 @@ class CreateQuestionnairesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('questionnaires');
+        Schema::dropIfExists('attendance_payment_rules');
     }
 }

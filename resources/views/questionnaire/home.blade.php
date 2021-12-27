@@ -1003,7 +1003,7 @@
                             {{-- Question : 13 End --}}
                             {{-- Question : 14 --}}
                             <div class="card" style="box-shadow: none; border: 1px solid rgba(0, 0, 0, 0.15);">
-                                <div class="card-header py-1" data-card-widget="collapse">
+                                <div class="card-header py-1 @error('atten_rule.*') text-white bg-danger @enderror" data-card-widget="collapse">
                                     <h3 class="card-title">Attendance Bonus</h3>
                                     <div class="card-tools">
                                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -1031,28 +1031,31 @@
                                                     <tr>
                                                         <td class="py-0 px-0" width="20%">
                                                             <input type="text" class="w-100 border-0"
-                                                                name="attenrule[]" style="height: 24px;"
+                                                                name="atten_rule[]" style="height: 24px;"
                                                                 placeholder="Rule-01 (Helper)"
                                                                 >
                                                         </td>
                                                         <td class="py-0 px-0" width="35%">
                                                             <input type="text" class="w-100 border-0"
-                                                                name="attencal[]" style="height: 24px;"
+                                                                name="atten_cal[]" style="height: 24px;"
                                                                 placeholder="Absent=0; Late = 0; Leave = 0"
                                                                 >
                                                         </td>
                                                         <td class="py-0 px-0" width="30%">
-                                                            <input type="text" class="w-100 border-0"
-                                                                name="attenamnt[]" style="height: 24px;"
+                                                            <input type="number" class="w-100 border-0"
+                                                                name="atten_amnt[]" style="height: 24px;"
                                                                 placeholder="400/-"
                                                                 >
                                                         </td>
                                                         <td class="py-0 px-0" width="10%">
                                                             <div class="custom-control custom-checkbox d-inline">
                                                                 <input class="custom-control-input" type="checkbox"
-                                                                    id="attenfixed" name="attenfixed"
-                                                                    value="isfixed">
-                                                                <label for="attenfixed" class="custom-control-label"
+                                                                    id="atten_fixed" name="atten_fixed[]"
+                                                                    value="1">
+                                                                    <input class="custom-control-input" type="hidden"
+                                                                    id="atten_fixed_h" name="atten_fixed[]"
+                                                                    value="0">
+                                                                <label for="atten_fixed" class="custom-control-label"
                                                                     title="Is Fixed Salary"
                                                                     style="cursor: pointer;"></label>
                                                             </div>
@@ -1127,7 +1130,7 @@
                             {{-- Question : 15 End --}}
                             {{-- Question : 16 --}}
                             <div class="card" style="box-shadow: none; border: 1px solid rgba(0, 0, 0, 0.15);">
-                                <div class="card-header py-1" data-card-widget="collapse">
+                                <div class="card-header py-1 @error('other_salary') text-white bg-danger @enderror" data-card-widget="collapse">
                                     <h3 class="card-title">Others Allowance</h3>
                                     <div class="card-tools">
                                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -1140,16 +1143,16 @@
                                         <label for="questions16">15. Do you have any Additional Allowances?
                                         </label>
                                         <div class="icheck-primary d-inline ml-3 mr-2">
-                                            <input class="btn1 btn-yes" type="radio" id="radioPrimary1" name="r1"
+                                            <input class="btn1 btn-yes" type="radio" id="other_salary1" name="other_salary"
                                                 value="yes">
-                                            <label for="radioPrimary1">Yes</label>
+                                            <label for="other_salary1">Yes</label>
                                         </div>
                                         <div class="icheck-primary d-inline">
-                                            <input class="btn2 btn-no" type="radio" id="radioPrimary2" name="r1"
+                                            <input class="btn2 btn-no" type="radio" id="other_salary2" name="other_salary"
                                                 value="no">
-                                            <label for="radioPrimary2">No</label>
+                                            <label for="other_salary2">No</label>
                                         </div>
-                                        <div class="mt-2 showDetails">
+                                        <div class="mt-2 showDetails" style="display: none;">
                                             <table class="table table-bordered text-center"
                                                 style="font-size: 14px;">
                                                 <thead>
@@ -1157,9 +1160,8 @@
                                                         <th class="py-1">Rule Name</th>
                                                         <th class="py-1">Condition</th>
                                                         <th class="py-1">Day Status</th>
-                                                        <th class="py-1">Shift Type</th>
                                                         <th class="py-1">Amount</th>
-                                                        <th class="py-1">Fixed</th>
+                                                        <th class="py-1">Remarks</th>
                                                         <th class="py-1">Action</th>
 
                                                     </tr>
@@ -1168,51 +1170,24 @@
                                                     <tr>
                                                         <td class="py-0 px-0" width="20%">
                                                             <input type="text" class="w-100 border-0"
-                                                                name="otherrule[]" style="height: 24px;">
+                                                                name="other_rule[]" style="height: 24px;">
                                                         </td>
                                                         <td class="py-0 px-0" width="auto">
-                                                            <div class="d-inline ml-2">
-                                                                <select name="category" id="cat" class="custom-select custom-select-sm w-25">
-                                                                    <option value="0" selected>Select Punch Type</option>
-                                                                    <option value="1">Out Time</option>
-                                                                    <option value="2">In Time</option>
-                                                                </select>
+                                                            <input type="text" class="w-100 border-0"
+                                                            name="other_condition[]" style="height: 24px;">
 
-                                                                    <input type="time" class="w-25 border-1"
-                                                                    name="mlvdaysafter[]" placeholder="OutTime"
-                                                                    style="height: 24px;">
-                                                            </div>
-                                                            <div class="custom-control custom-radio d-inline mr-2">
-                                                                <input type="radio" class="custom-control-input"
-                                                                    name="dependson" id="depends1" value="doj">
-                                                                <label title="Date of Joining" for="depends1"
-                                                                    class="custom-control-label"
-                                                                    style="font-size: 14px; cursor: pointer;">Daily</label>
-                                                            </div>
-                                                            <div class="custom-control custom-radio d-inline">
-                                                                <input type="radio" class="custom-control-input"
-                                                                    name="dependson" id="depends2" value="doj">
-                                                                <label title="Date of confirmation" for="depends2"
-                                                                    class="custom-control-label"
-                                                                    style="font-size: 14px; cursor: pointer;">Monthly</label>
-                                                            </div>
-
-
+                                                        </td>
+                                                        <td class="py-0 px-0" width="20%">
+                                                            <input type="text" class="w-100 border-0"
+                                                                name="day_status[]" style="height: 24px;">
                                                         </td>
                                                         <td class="py-0 px-0" width="10%">
                                                             <input type="text" class="w-100 border-0"
-                                                                name="otherruleamnt[]" style="height: 24px;">
+                                                                name="other_rule_amnt[]" style="height: 24px;">
                                                         </td>
-                                                        <td class="py-0 px-0" width="10%">
-                                                            <div class="custom-control custom-checkbox d-inline">
-                                                                <input class="custom-control-input" type="checkbox"
-                                                                    id="otherrulefixed" name="otherrulefixed"
-                                                                    value="isfixed">
-                                                                <label for="otherrulefixed"
-                                                                    class="custom-control-label"
-                                                                    title="Is Fixed Salary"
-                                                                    style="cursor: pointer;"></label>
-                                                            </div>
+                                                        <td class="py-0 px-0" width="20%">
+                                                            <input type="text" class="w-100 border-0"
+                                                                name="other_rule_remarks[]" style="height: 24px;">
                                                         </td>
                                                         <td class="py-0 px-0" style="width: 5%;">
                                                             <i class="far fa-trash-alt text-danger delete"></i>
@@ -1231,7 +1206,7 @@
                             {{-- Question : 16 End --}}
                             {{-- Question : 17 --}}
                             <div class="card" style="box-shadow: none; border: 1px solid rgba(0, 0, 0, 0.15);">
-                                <div class="card-header py-1" data-card-widget="collapse">
+                                <div class="card-header py-1 @error('deduction_rule.*') text-white bg-danger @enderror" data-card-widget="collapse">
                                     <h3 class="card-title">Salary Deduction</h3>
                                     <div class="card-tools">
                                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -1258,39 +1233,41 @@
                                                 </thead>
                                                 <tbody class="salary-deduct-rule-body">
                                                     <tr>
-                                                        <td class="py-0 px-0" width="20%">
+                                                        <td class="py-0 px-0" width="15%">
                                                             <div class="d-flex">
                                                                 <select class="custom-select custom-select-sm"
-                                                                    style="height: 25px;">
-                                                                    <option selected>Select Rule Name</option>
-                                                                    <option value="1" selected>Absenteeism</option>
-                                                                    <option value="2">Late In</option>
-                                                                    <option value="3">Early Out</option>
-                                                                    <option value="4">No Pay</option>
-                                                                    <option value="5">Advance</option>
-                                                                    <option value="6">Adjustment</option>
-                                                                    <option value="6">Others</option>
+                                                                    style="height: 25px;" name="deduction_rule[]">
+                                                                    <option value="" selected>Select Rule Name</option>
+                                                                    <option value="Absenteeism">Absenteeism</option>
+                                                                    <option value="Late In">Late In</option>
+                                                                    <option value="Early Out">Early Out</option>
+                                                                    <option value="No Pay">No Pay</option>
+                                                                    <option value="Advance">Advance</option>
+                                                                    <option value="Adjustment">Adjustment</option>
+                                                                    <option value="Others">Others</option>
                                                                 </select>
                                                             </div>
                                                         </td>
-                                                        <td class="py-0 px-0" width="40%">
+                                                        <td class="py-0 px-0" width="25%">
                                                             <input type="text" class="w-100 border-0"
                                                                 name="deduct_con[]" placeholder="Absent > 0">
                                                         </td>
-                                                        <td class="py-0 px-0" width="40%">
+                                                        <td class="py-0 px-0" width="25%">
                                                             <input type="text" class="w-100 border-0"
                                                                 name="deduct_cal[]" placeholder="BASIC / 30 * Absent Days">
                                                         </td>
                                                         <td class="py-0 px-0" width="10%">
                                                             <div class="custom-control custom-checkbox d-inline">
                                                                 <input class="custom-control-input" type="checkbox"
-                                                                    id="salde" name="salde" value="salde">
+                                                                    id="salde" name="sal_ded_fix[]" value="1">
+                                                                    <input class="custom-control-input" type="hidden"
+                                                                    id="sal_ded" name="sal_ded_fix[]" value="0">
                                                                 <label for="salde" class="custom-control-label"
                                                                     title="Is Taxable"
                                                                     style="cursor: pointer;"></label>
                                                             </div>
                                                         </td>
-                                                        <td class="py-0 px-0 w-25">
+                                                        <td class="py-0 px-0" width="40%">
                                                             <input type="text" class="w-100 border-0"
                                                                 name="salde_remarks[]">
                                                         </td>
@@ -1351,7 +1328,7 @@
                             {{-- Question : 18 End --}}
                             {{-- Question : 19 --}}
                             <div class="card" style="box-shadow: none; border: 1px solid rgba(0, 0, 0, 0.15);">
-                                <div class="card-header py-1" data-card-widget="collapse">
+                                <div class="card-header py-1 @error('bonus_rule.*') text-white bg-danger @enderror" data-card-widget="collapse">
                                     <h3 class="card-title">Festival Bonus</h3>
                                     <div class="card-tools">
                                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -1370,33 +1347,40 @@
                                                     <tr>
                                                         <th class="py-1">Rule Name</th>
                                                         <th class="py-1">Calculation</th>
+                                                        <th class="py-1">Amount</th>
                                                         <th class="py-1">Fixed</th>
                                                         <th class="py-1">Remarks</th>
                                                         <th class="py-1">Action</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody class="tax-rule-body">
+                                                <tbody class="bonus-rule-body">
                                                     <tr>
                                                         <td class="py-0 px-0" width="20%">
                                                             <input type="text" class="w-100 border-0"
-                                                                name="tax_rule[]">
+                                                                name="bonus_rule[]">
                                                         </td>
                                                         <td class="py-0 px-0" width="40%">
                                                             <input type="text" class="w-100 border-0"
-                                                                name="tax_cal[]">
+                                                                name="bonus_cal[]">
+                                                        </td>
+                                                        <td class="py-0 px-0" width="10%">
+                                                            <input type="text" class="w-100 border-0"
+                                                                name="bonus_amout[]">
                                                         </td>
                                                         <td class="py-0 px-0" width="10%">
                                                             <div class="custom-control custom-checkbox d-inline">
                                                                 <input class="custom-control-input" type="checkbox"
-                                                                    id="taxfixed" name="taxfixed" value="taxfixed">
-                                                                <label for="taxfixed" class="custom-control-label"
-                                                                    title="Is Taxable"
+                                                                    id="bonus_fixed" name="bonus_fixed[]" value="1">
+                                                                    <input class="custom-control-input" type="hidden"
+                                                                    id="bonus_fixed_h" name="bonus_fixed[]" value="0">
+                                                                <label for="bonus_fixed" class="custom-control-label"
+                                                                    title="Is Fixed"
                                                                     style="cursor: pointer;"></label>
                                                             </div>
                                                         </td>
                                                         <td class="py-0 px-0 w-25">
                                                             <input type="text" class="w-100 border-0"
-                                                                name="tax_remarks[]">
+                                                                name="bonus_remarks[]">
                                                         </td>
                                                         <td class="py-0 px-0" style="width: 5%;">
                                                             <i class="far fa-trash-alt text-danger delete"></i>
@@ -1405,7 +1389,7 @@
                                                 </tbody>
                                             </table>
                                             <div style="margin-top: -10px;">
-                                                <button class="btn btn-sm btn-info add-tax-rule">Add <i
+                                                <button class="btn btn-sm btn-info add-bonus-rule">Add <i
                                                         class="fas fa-plus"></i></button>
                                             </div>
                                         </div>

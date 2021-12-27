@@ -374,10 +374,10 @@ $(document).ready(function () {
                     <td class="py-0 px-0" width="10%">
                         <div class="custom-control custom-checkbox d-inline">
                             <input class="custom-control-input" type="checkbox"
-                                id="salaryfixed" name="isfixed" value="is_fixed[]">
+                                id="salaryfixed`+count+`" name="isfixed" value="is_fixed[]">
                                 <input class="custom-control-input" type="hidden"
-                                id="salaryfixed" name="is_fixed[]" value="0">
-                            <label for="salaryfixed"
+                                id="salaryfixed_h`+count+`" name="is_fixed[]" value="0">
+                            <label for="salaryfixed`+count+`"
                                 class="custom-control-label"
                                 title="Is Fixed Salary"
                                 style="cursor: pointer;"></label>
@@ -398,23 +398,32 @@ $(document).ready(function () {
         e.preventDefault();
            count = count + 2;
         var html = `<tr>
-                    <td class="py-0 px-0" width="20%">
-                        <input type="text" class="w-100 border-0" name="attenrule[]"
-                        style="height: 24px;">
+                        <td class="py-0 px-0" width="20%">
+                        <input type="text" class="w-100 border-0"
+                            name="atten_rule[]" style="height: 24px;"
+                            placeholder="Rule-01 (Helper)"
+                            >
                     </td>
                     <td class="py-0 px-0" width="35%">
-                            <input type="text" class="w-100 border-0" name="attencal[]"
-                        style="height: 24px;">
+                        <input type="text" class="w-100 border-0"
+                            name="atten_cal[]" style="height: 24px;"
+                            placeholder="Absent=0; Late = 0; Leave = 0"
+                            >
                     </td>
                     <td class="py-0 px-0" width="30%">
-                        <input type="text" class="w-100 border-0" name="attenamnt[]"
-                        style="height: 24px;">
+                        <input type="number" class="w-100 border-0"
+                            name="atten_amnt[]" style="height: 24px;"
+                            placeholder="400/-"
+                            >
                     </td>
-                        <td class="py-0 px-0" width="10%">
+                    <td class="py-0 px-0" width="10%">
                         <div class="custom-control custom-checkbox d-inline">
-                            <input class="custom-control-input" type="checkbox" id="attenfixed`+count+`" name="attenfixed" value="isfixed">
-                            <label for="attenfixed`+count+`" class="custom-control-label"
-                            title="Is Fixed Salary" style="cursor: pointer;"></label>
+                            <input class="custom-control-input" type="checkbox"
+                                id="atten_fixed`+(count)+`" name="atten_fixed[]"
+                                value="1">
+                            <label for="atten_fixed`+(count)+`" class="custom-control-label"
+                                title="Is Fixed Salary"
+                                style="cursor: pointer;"></label>
                         </div>
                     </td>
                     <td class="py-0 px-0" style="width: 5%;">
@@ -447,24 +456,26 @@ $(document).ready(function () {
         e.preventDefault();
            count = count + 2;
         var html = `<tr>
+                        <td class="py-0 px-0" width="20%">
+                        <input type="text" class="w-100 border-0"
+                            name="other_rule[]" style="height: 24px;">
+                    </td>
+                    <td class="py-0 px-0" width="auto">
+                        <input type="text" class="w-100 border-0"
+                        name="other_condition[]" style="height: 24px;">
+
+                    </td>
                     <td class="py-0 px-0" width="20%">
-                        <input type="text" class="w-100 border-0" name="otherrule[]"
-                        style="height: 24px;">
+                        <input type="text" class="w-100 border-0"
+                            name="day_status[]" style="height: 24px;">
                     </td>
-                    <td class="py-0 px-0" width="35%">
-                            <input type="text" class="w-100 border-0" name="otherrulecal[]"
-                        style="height: 24px;">
+                    <td class="py-0 px-0" width="10%">
+                        <input type="text" class="w-100 border-0"
+                            name="other_rule_amnt[]" style="height: 24px;">
                     </td>
-                    <td class="py-0 px-0" width="30%">
-                        <input type="text" class="w-100 border-0" name="otherruleamnt[]"
-                        style="height: 24px;">
-                    </td>
-                        <td class="py-0 px-0" width="10%">
-                        <div class="custom-control custom-checkbox d-inline">
-                            <input class="custom-control-input" type="checkbox" id="otherrulefixed`+count+`" name="otherrulefixed" value="isfixed">
-                            <label for="otherrulefixed`+count+`" class="custom-control-label"
-                            title="Is Fixed Salary" style="cursor: pointer;"></label>
-                        </div>
+                    <td class="py-0 px-0" width="20%">
+                        <input type="text" class="w-100 border-0"
+                            name="other_rule_remarks[]" style="height: 24px;">
                     </td>
                     <td class="py-0 px-0" style="width: 5%;">
                         <i class="far fa-trash-alt text-danger delete"></i>
@@ -504,32 +515,43 @@ $(document).ready(function () {
         e.preventDefault();
            count = count + 2;
         var html = `<tr>
-                    <td class="py-0 px-0" width="20%">
+                        <td class="py-0 px-0" width="15%">
                         <div class="d-flex">
-                            <select class="custom-select custom-select-sm" style="height: 25px;">
-                                <option selected>Select Rule Name</option>
-                                <option value="1">Absenteeism</option>
-                                <option value="2">Late In</option>
-                                <option value="3">Early Out</option>
-                                <option value="4">No Pay</option>
-                                <option value="5">Advance</option>
-                                <option value="6">Adjustment</option>
-                                <option value="6">Others</option>
+                            <select class="custom-select custom-select-sm"
+                                style="height: 25px;" name="deduction_rule[]">
+                                <option value="0" selected disabled>Select Rule Name</option>
+                                <option value="Absenteeism">Absenteeism</option>
+                                <option value="Late In">Late In</option>
+                                <option value="Early Out">Early Out</option>
+                                <option value="No Pay">No Pay</option>
+                                <option value="Advance">Advance</option>
+                                <option value="Adjustment">Adjustment</option>
+                                <option value="Others">Others</option>
                             </select>
                         </div>
                     </td>
-                    <td class="py-0 px-0" width="40%">
-                        <input type="text" class="w-100 border-0" name="deduct_cal[]">
+                    <td class="py-0 px-0" width="25%">
+                        <input type="text" class="w-100 border-0"
+                            name="deduct_con[]" placeholder="Absent > 0">
+                    </td>
+                    <td class="py-0 px-0" width="25%">
+                        <input type="text" class="w-100 border-0"
+                            name="deduct_cal[]" placeholder="BASIC / 30 * Absent Days">
                     </td>
                     <td class="py-0 px-0" width="10%">
                         <div class="custom-control custom-checkbox d-inline">
-                            <input class="custom-control-input" type="checkbox" id="salde`+count+`" name="salde" value="salde">
-                            <label for="salde`+count+`" class="custom-control-label"
-                            title="Is Taxable" style="cursor: pointer;"></label>
+                            <input class="custom-control-input" type="checkbox"
+                                id="sal_ded_fix`+count+`" name="sal_ded_fix[]" value="1">
+                                <input class="custom-control-input" type="hidden"
+                                id="sal_ded`+count+`" name="sal_ded_fix[]" value="0">
+                            <label for="sal_ded_fix`+count+`" class="custom-control-label"
+                                title="Is Taxable"
+                                style="cursor: pointer;"></label>
                         </div>
                     </td>
-                    <td class="py-0 px-0 w-25">
-                        <input type="text" class="w-100 border-0" name="salde_remarks[]">
+                    <td class="py-0 px-0" width="40%">
+                        <input type="text" class="w-100 border-0"
+                            name="salde_remarks[]">
                     </td>
                     <td class="py-0 px-0" style="width: 5%;">
                         <i class="far fa-trash-alt text-danger delete"></i>
@@ -538,31 +560,42 @@ $(document).ready(function () {
         $('.salary-deduct-rule-body').append(html);
     })
 
-    $('.add-tax-rule').click(function (e) {
+    $('.add-bonus-rule').click(function (e) {
         e.preventDefault();
            count = count + 2;
         var html = `<tr>
-                    <td class="py-0 px-0" width="20%">
-                        <input type="text" class="w-100 border-0" name="tax_rule[]">
+                        <td class="py-0 px-0" width="20%">
+                        <input type="text" class="w-100 border-0"
+                            name="bonus_rule[]">
                     </td>
                     <td class="py-0 px-0" width="40%">
-                        <input type="text" class="w-100 border-0" name="tax_cal[]">
+                        <input type="text" class="w-100 border-0"
+                            name="bonus_cal[]">
+                    </td>
+                    <td class="py-0 px-0" width="10%">
+                    <input type="text" class="w-100 border-0"
+                        name="bonus_amout[]">
                     </td>
                     <td class="py-0 px-0" width="10%">
                         <div class="custom-control custom-checkbox d-inline">
-                            <input class="custom-control-input" type="checkbox" id="taxfixed`+count+`" name="taxfixed" value="taxfixed">
-                            <label for="taxfixed`+count+`" class="custom-control-label"
-                            title="Is Taxable" style="cursor: pointer;"></label>
+                            <input class="custom-control-input" type="checkbox"
+                                id="bonus_fixed`+count+`" name="bonus_fixed[]" value="1">
+                                <input class="custom-control-input" type="hidden"
+                                id="bonus_fixed_h`+count+`" name="bonus_fixed[]" value="0">
+                            <label for="bonus_fixed`+count+`" class="custom-control-label"
+                                title="Is Fixed"
+                                style="cursor: pointer;"></label>
                         </div>
                     </td>
                     <td class="py-0 px-0 w-25">
-                        <input type="text" class="w-100 border-0" name="tax_remarks[]">
+                        <input type="text" class="w-100 border-0"
+                            name="bonus_remarks[]">
                     </td>
                     <td class="py-0 px-0" style="width: 5%;">
                         <i class="far fa-trash-alt text-danger delete"></i>
                     </td>
                 </tr>`;
-        $('.tax-rule-body').append(html);
+        $('.bonus-rule-body').append(html);
     })
 
     $(document).on('click', '.delete', function () {

@@ -55,7 +55,8 @@
 
 .encash-policy-body input::placeholder,
 .salary-rule-body input::placeholder,
-.salary-heads-body input::placeholder {
+.salary-heads-body input::placeholder,
+.salary-deduct-rule-body input::placeholder {
     font-size: 10px !important;
     padding-left: 5px;
 }
