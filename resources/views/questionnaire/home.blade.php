@@ -1417,8 +1417,8 @@
 @include('modal.leaveAllocation')
 
 {{-- Scroll to Top Button --}}
-<div class="float-right">
+{{-- <div class="float-right">
     <button class="btn btn-primary scroll-top" data-scroll="up" type="button">
         <i class="fa fa-chevron-up"></i>
     </button>
-</div>
+</div> --}}

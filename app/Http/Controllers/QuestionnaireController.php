@@ -84,6 +84,7 @@ class QuestionnaireController extends Controller
     {
         // return $request;
         // return $this->storeAttenPaymentRuleAns($request);
+
         $validated  = $request->validate(
             [
                 'pims_upload'   => 'required',
@@ -191,14 +192,12 @@ class QuestionnaireController extends Controller
         $SalaryDeduct   = $this->storeSalaryDeductionRuleAns($request); // 16
         $FestivaBonus   = $this->storeFestivalBonusRuleAns($request); // 18
 
-        if ($pims && $device && $shift && $shiftRule && $OTRonding && $OTRate && $LVCal &&
-            $LVPolicy && $LVEncash && $MLV && $SalaryPP && $SalaryRule && $SalaryHead && $AttenPay &&
-            $OtherRule && $SalaryDeduct && $FestivaBonus) {
-                Questionnaire::create([
-                    'com_id'    =>  $comid,
-                    'added_by'  => Auth::user()->id
-                ]);
-        }
+        // if ($pims && $device && $shift && $shiftRule && $OTRonding && $OTRate && $LVCal && $LVPolicy && $LVEncash && $MLV && $SalaryPP && $SalaryRule && $SalaryHead && $AttenPay && $OtherRule && $SalaryDeduct && $FestivaBonus) {
+            Questionnaire::create([
+                'com_id'    =>  $comid,
+                'added_by'  => Auth::user()->id
+            ]);
+        // }
     }
 
     /**
