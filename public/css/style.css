@@ -70,3 +70,7 @@
     font-size: 12px !important;
     min-height: 0;
 }
+
+#report caption {
+    caption-side: top !important;
+}

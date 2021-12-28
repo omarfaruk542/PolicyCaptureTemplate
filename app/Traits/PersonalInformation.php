@@ -16,8 +16,6 @@ trait PersonalInformation {
         $pims->added_by     = Auth::user()->id;
         $pims->updated_by   = null;
         $pims->save();
-
-
     }
 
 }

@@ -83,8 +83,6 @@ class QuestionnaireController extends Controller
     public function store(Request $request)
     {
         // return $request;
-        // return $this->storeAttenPaymentRuleAns($request);
-
         $validated  = $request->validate(
             [
                 'pims_upload'   => 'required',
@@ -192,12 +190,13 @@ class QuestionnaireController extends Controller
         $SalaryDeduct   = $this->storeSalaryDeductionRuleAns($request); // 16
         $FestivaBonus   = $this->storeFestivalBonusRuleAns($request); // 18
 
-        // if ($pims && $device && $shift && $shiftRule && $OTRonding && $OTRate && $LVCal && $LVPolicy && $LVEncash && $MLV && $SalaryPP && $SalaryRule && $SalaryHead && $AttenPay && $OtherRule && $SalaryDeduct && $FestivaBonus) {
-            Questionnaire::create([
-                'com_id'    =>  $comid,
-                'added_by'  => Auth::user()->id
-            ]);
-        // }
+        $questions = new Questionnaire;
+        $questions->com_id = $comid;
+        $questions->added_by = Auth::user()->id;
+        if ($questions->save()) {
+            // return view('questionnaire.thankyou');
+            return  $this->all_policies($questions->id);
+        }
     }
 
     /**
@@ -243,5 +242,19 @@ class QuestionnaireController extends Controller
     public function destroy(Questionnaire $questionnaire)
     {
         //
+    }
+
+    public function all_policies($id)
+    {
+        $data = Questionnaire::with('company','pims', 'device', 'shiftplan', 'shiftrule', 'otround', 'otrate', 'lvcalendar', 'lvpolicy', 'lvencash', 'mlvpolicy', 'salaryperiod', 'salaryrule','salaryhead','attenpayment','othersalary','salarydeduction','bonus')->find($id);
+        return $data;
+    }
+
+    public function report($id)
+    {
+        $data = Questionnaire::with('company','pims', 'device', 'shiftplan', 'shiftrule', 'otround', 'otrate', 'lvcalendar', 'lvpolicy', 'lvencash', 'mlvpolicy', 'salaryperiod', 'salaryrule','salaryhead','attenpayment','othersalary','salarydeduction','bonus')->find($id);
+        // return $data;
+        return view('questionnaire.report',compact('data'));
+
     }
 }

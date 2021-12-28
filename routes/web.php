@@ -31,3 +31,6 @@ Route::resource('/company', 'CompanyInfoController');
 Route::get('/user','Auth\UserController@index')->name('user.index');
 Route::get('/user/create','Auth\UserController@create')->name('user.create');
 Route::resource('/question','QuestionnaireController');
+
+Route::get('/alldata/{id}','QuestionnaireController@all_policies');
+Route::get('/report/{id}','QuestionnaireController@report');

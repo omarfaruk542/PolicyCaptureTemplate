@@ -886,12 +886,12 @@
                                                                 <select class="custom-select custom-select-sm border-0"
                                                                     style="height: 25px;" name="salary_head[]">
                                                                     <option selected>Select Salary Head</option>
-                                                                    <option value="1">GROSS</option>
-                                                                    <option value="2" selected>BASIC</option>
-                                                                    <option value="3">HOUSE RENT</option>
-                                                                    <option value="4">MEDICAL</option>
-                                                                    <option value="5">FOOD ALLOWANCE</option>
-                                                                    <option value="6">CONVEYANCE ALLOWANCE</option>
+                                                                    <option value="GROSS">GROSS</option>
+                                                                    <option value="BASIC" selected>BASIC</option>
+                                                                    <option value="HOUSE RENT">HOUSE RENT</option>
+                                                                    <option value="MEDICAL">MEDICAL</option>
+                                                                    <option value="FOOD ALLOWANCE">FOOD ALLOWANCE</option>
+                                                                    <option value="CONVEYANCE ALLOWANCE">CONVEYANCE ALLOWANCE</option>
                                                                 </select>
                                                             </div>
                                                         </td>
