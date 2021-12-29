@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container">
+    <div class="container" id="example1_wrapper">
+        <div class="row">
         <table class="table-sm caption-top table-bordered" id="report" style="font-size: 12px;">
             <caption class="text-center">
                 <h3>{{ $data->company->name }}</h3>
@@ -16,9 +17,6 @@
                 </tr>
             </thead>
             <tbody>
-                @php
-                    $id = 2;
-                @endphp
                 <tr>
                     <td class="text-center">1</td>
                     <td>Personal Information Management</td>
@@ -520,16 +518,9 @@
                     <td></td>
                 </tr>
 
-
-
-
-                    @php
-                        $id++;
-                    @endphp
-
             </tbody>
         </table>
 
-
+    </div>
     </div>
 @endsection

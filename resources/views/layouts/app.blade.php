@@ -121,6 +121,8 @@
 <script src="{{ asset('js/gridview.js') }}"></script>
 <!-- Page script -->
 <script src="{{ asset('js/custom-script.js') }}"></script>
+<!-- Report Export -->
+{{-- <script src="{{ asset('assets/customs-asset/report.export.js') }}"></script> --}}
 <script>
 $(document).ready(function(){
    $(document).on('change','input[type="file"]',function(){

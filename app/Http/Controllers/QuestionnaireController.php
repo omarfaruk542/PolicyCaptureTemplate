@@ -195,7 +195,8 @@ class QuestionnaireController extends Controller
         $questions->added_by = Auth::user()->id;
         if ($questions->save()) {
             // return view('questionnaire.thankyou');
-            return  $this->all_policies($questions->id);
+            // return  $this->all_policies($questions->id);
+            return redirect()->route('report',$questions->id);
         }
     }
 
