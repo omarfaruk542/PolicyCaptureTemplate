@@ -19,7 +19,7 @@ class CreateShiftPlansTable extends Migration
             $table->string('shiftname')->nullable();
             $table->time('intime')->nullable();
             $table->time('outtime')->nullable();
-            $table->time('whour')->nullable()->comment('whour=working hour');
+            $table->decimal('whour',18,2)->nullable()->comment('whour=working hour');
             $table->time('lgrace')->nullable()->comment('lgrace=late grace');
             $table->time('eograce')->nullable()->comment('eograce=early out grace');
             $table->time('lout')->nullable()->comment('lout=lunch out');
