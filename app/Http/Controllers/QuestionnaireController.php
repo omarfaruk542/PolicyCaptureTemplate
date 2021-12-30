@@ -258,4 +258,15 @@ class QuestionnaireController extends Controller
         return view('questionnaire.report',compact('data'));
 
     }
+
+    public function CompanyWiseReport($id){
+        $data = Questionnaire::with('company','pims', 'device', 'shiftplan', 'shiftrule', 'otround', 'otrate', 'lvcalendar', 'lvpolicy', 'lvencash', 'mlvpolicy', 'salaryperiod', 'salaryrule','salaryhead','attenpayment','othersalary','salarydeduction','bonus')->where('com_id',$id)->first();
+        // return $data;
+        if($data){
+            return view('questionnaire.report',compact('data'));
+        } else {
+            return redirect()->back()->with('error', 'No policy document found');
+        }
+
+    }
 }

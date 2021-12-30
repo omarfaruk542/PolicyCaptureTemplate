@@ -27,11 +27,12 @@ class CompanyInfoController extends Controller
     {
         $projectList = CompanyInfo::orderBy('id','DESC')->get();
         $totalProjects = count($projectList);
-        if ($request->ajax()) {
-            return response()->json($projectList);
-        } else {
-            return view('adminpanel.company_list',compact('projectList','totalProjects'));
-        }
+        // if ($request->ajax()) {
+        //     return response()->json($projectList);
+        // } else {
+        //     return view('adminpanel.company_list',compact('projectList','totalProjects'));
+        // }
+        return view('adminpanel.company_list',compact('projectList','totalProjects'));
 
     }
 

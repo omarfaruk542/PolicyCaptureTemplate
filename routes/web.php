@@ -34,3 +34,4 @@ Route::resource('/question','QuestionnaireController');
 
 Route::get('/alldata/{id}','QuestionnaireController@all_policies');
 Route::get('/report/{id}','QuestionnaireController@report')->name('report');
+Route::get('/policy/doc/{id}','QuestionnaireController@CompanyWiseReport')->name('policyreport');

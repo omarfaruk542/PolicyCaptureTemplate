@@ -21,6 +21,26 @@
                 </div>
             </div>
         @endif
+
+        @if (session('error'))
+            <div class="toast message" style="position: absolute; top: 60px; right: 0; z-index: 1070; width:300px;"
+                data-delay="5000">
+                <div class="toast-header bg-danger">
+                    <strong class="mr-auto">Error</strong>
+                    <small>Just Now</small>
+                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="toast-body">
+                    <div>
+                        <i class="fas fa-check-square mr-2 text-success"></i>
+                        <span>{{ session('error') }}</span>
+
+                    </div>
+                </div>
+            </div>
+        @endif
         <!-- Notification -->
         <div class="container-fluid">
             <div class="row mb-2">
@@ -86,7 +106,7 @@
                                                                 {{ $projects->is_active ? 'Active' : 'Inactive' }}</span></h5>
                                                         </td>
                                                         <td class="text-center">
-                                                            <a href="#" class="btn btn-sm btn-primary">
+                                                            <a href="{{ route('policyreport',$projects->id) }}" class="btn btn-sm btn-primary">
                                                                 <i class="far fa-file-pdf"></i></a>
                                                             <a href="#" class="btn btn-sm btn-info mx-1"><i
                                                                     class="fas fa-pencil-alt"></i></a>
